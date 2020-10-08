@@ -1,0 +1,9 @@
+grammar org.xtext.idmGH.mlregDsl.MLReg with org.eclipse.xtext.common.Terminals
+
+generate mLReg "http://www.xtext.org/idmGH/mlregDsl/MLReg"
+
+Model:
+	greetings+=Greeting*;
+	
+Greeting:
+	'Hello' name=ID '!';
