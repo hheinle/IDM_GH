@@ -3,7 +3,48 @@ grammar org.xtext.idmGH.mlregDsl.MLReg with org.eclipse.xtext.common.Terminals
 generate mLReg "http://www.xtext.org/idmGH/mlregDsl/MLReg"
 
 Model:
-	greetings+=Greeting*;
+	mlRegression+=mlRegression*;
 	
-Greeting:
-	'Hello' name=ID '!';
+mlRegression:
+	csvFile=CsvFile
+	testSize=TestSize
+	predictiveVars=PredictiveVars
+	targetVar=TargetVar
+	algorithm=Algorithm
+	errorMeasure=ErrorMeasure
+;
+	
+CsvFile:
+	'import' csvFile=STRING;
+	
+TestSize:
+	'testSize' int=INT
+;
+
+PredictiveVars:
+	'predictiveVars {' predictiveVar+=ColVar+ '}'
+;
+
+TargetVar:
+	'targetVar' targetVar=ColVar
+;
+
+Algorithm:
+	'algo' algoName=AlgoName
+;
+
+enum AlgoName:
+	regressionTree = 'RegressionTree' | SVM = 'SVM' | linear = 'Linear'
+;
+
+ErrorMeasure:
+	'errorMeasure' errorMeasure=ErrorCalculation
+;
+
+ErrorCalculation:
+	meanRelativeError = 'meanRelativeError' | eqm = 'EQM'
+;	
+
+ColVar:
+	name=ID idCol=INT
+;
