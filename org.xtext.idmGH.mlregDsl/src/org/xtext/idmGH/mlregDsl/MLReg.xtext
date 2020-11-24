@@ -3,34 +3,41 @@ grammar org.xtext.idmGH.mlregDsl.MLReg with org.eclipse.xtext.common.Terminals
 generate mLReg "http://www.xtext.org/idmGH/mlregDsl/MLReg"
 
 Model:
-	mlRegression+=mlRegression*;
+	mlRegression=MlRegression;
 	
-mlRegression:
+MlRegression:
+	'regression' '{'
 	csvFile=CsvFile
+	','
 	testSize=TestSize
+	','
 	predictiveVars=PredictiveVars
+	','
 	targetVar=TargetVar
+	','
 	algorithm=Algorithm
+	','
 	errorMeasure=ErrorMeasure
+	'}'
 ;
 	
 CsvFile:
-	'import' csvFile=STRING;
+	'file' ':' csvFile=STRING;
 	
 TestSize:
-	'testSize' int=INT
+	'testSize' ':' int=INT
 ;
 
 PredictiveVars:
-	'predictiveVars {' predictiveVar+=ColVar+ '}'
+	'predictiveVariables' ':' '{' predictiveVar+=ColVar (',' predictiveVar+=ColVar)* '}'
 ;
 
 TargetVar:
-	'targetVar' targetVar=ColVar
+	'targetVariable' ':' targetVar=ColVar
 ;
 
 Algorithm:
-	'algo' algoName=AlgoName
+	'algorithm' ':'  algoName=AlgoName
 ;
 
 enum AlgoName:
@@ -38,13 +45,13 @@ enum AlgoName:
 ;
 
 ErrorMeasure:
-	'errorMeasure' errorMeasure=ErrorCalculation
+	'errorType' ':' errorMeasure = ErrorCalculation
 ;
 
-ErrorCalculation:
+enum ErrorCalculation:
 	meanRelativeError = 'meanRelativeError' | eqm = 'EQM'
 ;	
 
 ColVar:
-	name=ID idCol=INT
+	idCol=INT
 ;
