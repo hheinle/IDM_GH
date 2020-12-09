@@ -23,8 +23,6 @@ public class PythonCompiler {
 	}
 	
 	public void compileAndRun() throws IOException {
-		// MLRegression (file "../test.csv", testSize 70, 
-		// predictiveVars { var 2 }, targetVar vart 3, algo RegressionTree, errorMeasure meanRelativeError);
 
 		MlRegression mlRegression = this.model.getMlRegression();
 		String csvFile = mlRegression.getCsvFile().getCsvFile();
@@ -60,7 +58,6 @@ public class PythonCompiler {
 		// Spliting into LearningSet and TestSet
 		System.out.println("test size : "+testSize);
 		pythonCode += "X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0." + testSize + ", random_state=0)\n";
-//		pythonCode += "X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=70, random_state=0)\n";
 		
 		// Set algorithm to use
 		 if (algo.equalsIgnoreCase("linear")) {
@@ -81,7 +78,7 @@ public class PythonCompiler {
 				
 		
 		
-		// Compute and display the accuracy
+		// Compute and display the error
 		// Set error measure to use
 		 if (errorMeasure.equalsIgnoreCase("mean_squared_error")) {
 			pythonCode += "error = mean_squared_error(y_test, y_prediction)\n";
@@ -94,7 +91,9 @@ public class PythonCompiler {
 		
 		
 		// serialize code into Python filename
-		String PYTHON_OUTPUT = "foo1.py";			
+
+		csvFile = csvFile.substring(csvFile.lastIndexOf("/")).replace("/","");
+		String PYTHON_OUTPUT = "python_outputs/" + csvFile.replaceAll(".csv", "") + "_" + algo + ".py";			
 		Files.write(pythonCode.getBytes(), new File(PYTHON_OUTPUT));
 		Process p = Runtime.getRuntime().exec("python " + PYTHON_OUTPUT);
 	    BufferedReader stdInput = new BufferedReader(new 

@@ -19,10 +19,10 @@ class MLRegParsingTest {
 	ParseHelper<Model> parseHelper
 	
 	@Test
-	def void testLinearReg() {
+	def void testLinearReg1() {
 		val result = parseHelper.parse('''
 			regression{
-				file: "salary_data.csv",
+				file: "datasets/salary_data.csv",
 				testSize : 3,
 				predictiveVariables : {0},
 				 targetVariable: 1,
@@ -38,15 +38,53 @@ class MLRegParsingTest {
 	}
 	
 	@Test
+	def void testLinearReg2() {
+		val result = parseHelper.parse('''
+			regression{
+				file: "datasets/ozone.csv",
+				testSize : 3,
+				predictiveVariables : {1,2,3,4,5,6,7,8,9,10},
+				 targetVariable: 0,
+				 algorithm: Linear,
+				 errorType: r2_score
+			}		''')
+		Assertions.assertNotNull(result)
+		val errors = result.eResource.errors
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+		
+		val PythonCompiler cmpPython = new PythonCompiler(result)
+		cmpPython.compileAndRun
+	}
+	
+	@Test
+	def void testLinearReg3() {
+		val result = parseHelper.parse('''
+			regression{
+				file: "datasets/ozone.csv",
+				testSize : 3,
+				predictiveVariables : {1,2,9,10},
+				 targetVariable: 0,
+				 algorithm: Linear,
+				 errorType: r2_score
+			}		''')
+		Assertions.assertNotNull(result)
+		val errors = result.eResource.errors
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+		
+		val PythonCompiler cmpPython = new PythonCompiler(result)
+		cmpPython.compileAndRun
+	}
+	
+	@Test
 	def void testSVMReg() {
 		val result = parseHelper.parse('''
 			regression{
-				file: "salary_data.csv",
-				testSize : 1,
+				file: "datasets/salary_data.csv",
+				testSize : 3,
 				predictiveVariables : {0},
 				 targetVariable: 1,
 				 algorithm: SVM,
-				 errorType: meanRelativeError
+				 errorType: mean_squared_error
 			}		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors
@@ -60,12 +98,12 @@ class MLRegParsingTest {
 	def void testTreeReg() {
 		val result = parseHelper.parse('''
 			regression{
-				file: "salary_data.csv",
-				testSize : 1,
+				file: "datasets/salary_data.csv",
+				testSize : 3,
 				predictiveVariables : {0},
 				 targetVariable: 1,
 				 algorithm: RegressionTree,
-				 errorType: meanRelativeError
+				 errorType: mean_squared_error
 			}		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors
