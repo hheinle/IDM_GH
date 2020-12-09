@@ -25,7 +25,7 @@ CsvFile:
 	'file' ':' csvFile=STRING;
 	
 TestSize:
-	'testSize' ':' int=INT
+	{TestSize} 'testSize' ':' testSize=INT
 ;
 
 PredictiveVars:
@@ -49,7 +49,7 @@ ErrorMeasure:
 ;
 
 enum ErrorCalculation:
-	meanRelativeError = 'meanRelativeError' | eqm = 'EQM'
+	mean_squared_error = 'mean_squared_error' |  explained_variance_score  = 'explained_variance_score' | r2_score = 'r2_score'
 ;	
 
 ColVar:
