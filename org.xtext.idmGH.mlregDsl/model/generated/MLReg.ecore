@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="mLReg" nsURI="http://www.xtext.org/idmGH/mlregDsl/MLReg" nsPrefix="mLReg">
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mlRegression" eType="#//MlRegression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MlRegression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="csvFile" eType="#//CsvFile"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="testSize" eType="#//TestSize"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="predictiveVars" eType="#//PredictiveVars"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetVar" eType="#//TargetVar"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="algorithm" eType="#//Algorithm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="errorMeasure" eType="#//ErrorMeasure"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CsvFile">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="csvFile" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TestSize">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="testSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PredictiveVars">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="predictiveVar" upperBound="-1"
+        eType="#//ColVar" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TargetVar">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetVar" eType="#//ColVar"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Algorithm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="algoName" eType="#//AlgoName"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AlgoName">
+    <eLiterals name="regressionTree" literal="RegressionTree"/>
+    <eLiterals name="SVM" value="1" literal="SVM"/>
+    <eLiterals name="linear" value="2" literal="Linear"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ErrorMeasure">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="errorMeasure" eType="#//ErrorCalculation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ErrorCalculation">
+    <eLiterals name="mean_squared_error" literal="mean_squared_error"/>
+    <eLiterals name="explained_variance_score" value="1" literal="explained_variance_score"/>
+    <eLiterals name="r2_score" value="2" literal="r2_score"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ColVar">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="idCol" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+</ecore:EPackage>
