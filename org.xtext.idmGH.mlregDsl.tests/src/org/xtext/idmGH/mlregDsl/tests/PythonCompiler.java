@@ -39,7 +39,7 @@ public class PythonCompiler {
 				+ "from sklearn.linear_model import LinearRegression\n" + "from sklearn import svm\n"
 				+ "from sklearn.metrics import r2_score\n" + "from sklearn.metrics import explained_variance_score\n"
 				+ "from sklearn.metrics import mean_squared_error\n" + "df = pd.read_csv(\"" + csvFile + "\")\n";
-		
+
 		// Spliting dataset between features (X) and label (y)
 		pythonCode += "X = df.iloc[: ,[" + colVarsString + "]]\n";
 		pythonCode += "y = df.iloc[: ," + targetVar + "]\n";
@@ -62,7 +62,7 @@ public class PythonCompiler {
 
 		// Use the algorithm to create a model with the training set
 		pythonCode += "mlreg.fit(X_train, y_train)\n";
-
+		
 		// Prediction
 		pythonCode += "y_prediction = mlreg.predict(X_test)\n";
 		pythonCode += "df_prediction = pd.DataFrame({'Actual': y_test, 'Predicted': y_prediction})\n";
@@ -81,8 +81,18 @@ public class PythonCompiler {
 			pythonCode += "print(\"r2_score =\", error)\n";
 		}
 
-		// serialize code into Python filename
+		// Benchmarks Utils
+		pythonCode += "import csv\n";
+		pythonCode += "stats = [\"" + csvFile + "\", 'Pythonscikit-learn', y_prediction, 'time', error]\n";
+		pythonCode += "f = open('statistics/benchmark.csv', 'w')\n";
+		pythonCode += "with f: \n";
+		pythonCode += "	fnames = ['benchmark', 'variant', 'prediction result', 'Error measure', 'Time']\n";
+		pythonCode += "	writer = csv.DictWriter(f, fieldnames=fnames)\n";
+		pythonCode += "	writer.writeheader()\n";
+		pythonCode += "	writer.writerow({'benchmark' : \"" + csvFile + "\", 'variant': 'Python scikit-learn', 'prediction result': y_prediction, 'Error measure': error, 'Time': 'dfjlskjdf'})\n";
+		//pythonCode += "	writer.writerow(stats)";
 
+		// serialize code into Python filename
 		csvFile = csvFile.substring(csvFile.lastIndexOf("/")).replace("/", "");
 		String PYTHON_OUTPUT = "python_outputs/" + csvFile.replaceAll(".csv", "") + "_" + algo + "_" + errorMeasure + ".py";
 		Files.write(pythonCode.getBytes(), new File(PYTHON_OUTPUT));
@@ -97,5 +107,9 @@ public class PythonCompiler {
 		while ((err = stdError.readLine()) != null) {
 			System.out.println(err);
 		}
+
+
+
 	}
 }
+

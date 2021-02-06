@@ -19,3 +19,11 @@ df_prediction = pd.DataFrame({'Actual': y_test, 'Predicted': y_prediction})
 print("df_prediction : ", df_prediction)
 error = r2_score(y_test, y_prediction)
 print("r2_score =", error)
+import csv
+stats = ["datasets/ozone.csv", 'Pythonscikit-learn', y_prediction, 'time', error]
+f = open('statistics/benchmark.csv', 'w')
+with f: 
+	fnames = ['benchmark', 'variant', 'prediction result', 'Error measure', 'Time']
+	writer = csv.DictWriter(f, fieldnames=fnames)
+	writer.writeheader()
+	writer.writerow({'benchmark' : "datasets/ozone.csv", 'variant': 'Python scikit-learn', 'prediction result': y_prediction, 'Error measure': error, 'Time': 'dfjlskjdf'})

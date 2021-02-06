@@ -1,0 +1,4 @@
+benchmark,variant,prediction result,Error measure,Time
+datasets/ozone.csv,Python scikit-learn,"[ 54.  71.  71.  60. 117.  78. 121.  54.  57.  78. 117.  71.  92.  71.
+  71.  54.  83. 159.  56.  81.  70. 109.  98. 121.  83. 117.  93.  67.
+  77.  88.  82.]",0.18617688824890366,dfjlskjdf

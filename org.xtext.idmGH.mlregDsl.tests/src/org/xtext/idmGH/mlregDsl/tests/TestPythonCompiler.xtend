@@ -14,7 +14,7 @@ import org.xtext.idmGH.mlregDsl.mLReg.Model
 
 @ExtendWith(InjectionExtension)
 @InjectWith(MLRegInjectorProvider)
-class MLRegParsingTest {
+class TestPythonCompiler {
 	@Inject
 	ParseHelper<Model> parseHelper
 
