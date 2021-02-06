@@ -11,6 +11,7 @@ import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.extensions.InjectionExtension;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,16 +33,16 @@ public class MLRegParsingTest {
       _builder.append("regression{");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("file: \"datasets/salary_data.csv\",");
+      _builder.append("file: \"datasets/ozone.csv\",");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("testSize : 3,");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("predictiveVariables : {0},");
+      _builder.append("predictiveVariables : {1},");
       _builder.newLine();
       _builder.append("\t ");
-      _builder.append("targetVariable: 1,");
+      _builder.append("targetVariable: 0,");
       _builder.newLine();
       _builder.append("\t ");
       _builder.append("algorithm: Linear,");
@@ -55,7 +56,9 @@ public class MLRegParsingTest {
       final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
       boolean _isEmpty = errors.isEmpty();
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("Unexpected errors: errors.join(\", \")");
+      _builder_1.append("Unexpected errors: ");
+      String _join = IterableExtensions.join(errors, ", ");
+      _builder_1.append(_join);
       Assertions.assertTrue(_isEmpty, _builder_1.toString());
       final PythonCompiler cmpPython = new PythonCompiler(result);
       cmpPython.compileAndRun();
@@ -94,7 +97,9 @@ public class MLRegParsingTest {
       final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
       boolean _isEmpty = errors.isEmpty();
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("Unexpected errors: errors.join(\", \")");
+      _builder_1.append("Unexpected errors: ");
+      String _join = IterableExtensions.join(errors, ", ");
+      _builder_1.append(_join);
       Assertions.assertTrue(_isEmpty, _builder_1.toString());
       final PythonCompiler cmpPython = new PythonCompiler(result);
       cmpPython.compileAndRun();
@@ -125,7 +130,7 @@ public class MLRegParsingTest {
       _builder.append("algorithm: Linear,");
       _builder.newLine();
       _builder.append("\t ");
-      _builder.append("errorType: r2_score");
+      _builder.append("errorType: explained_variance_score");
       _builder.newLine();
       _builder.append("}\t\t");
       final Model result = this.parseHelper.parse(_builder);
@@ -133,7 +138,9 @@ public class MLRegParsingTest {
       final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
       boolean _isEmpty = errors.isEmpty();
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("Unexpected errors: errors.join(\", \")");
+      _builder_1.append("Unexpected errors: ");
+      String _join = IterableExtensions.join(errors, ", ");
+      _builder_1.append(_join);
       Assertions.assertTrue(_isEmpty, _builder_1.toString());
       final PythonCompiler cmpPython = new PythonCompiler(result);
       cmpPython.compileAndRun();
@@ -143,22 +150,22 @@ public class MLRegParsingTest {
   }
   
   @Test
-  public void testSVMReg() {
+  public void testSVMReg1() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("regression{");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("file: \"datasets/salary_data.csv\",");
+      _builder.append("file: \"datasets/ozone.csv\",");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("testSize : 3,");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("predictiveVariables : {0},");
+      _builder.append("predictiveVariables : {2,3,4},");
       _builder.newLine();
       _builder.append("\t ");
-      _builder.append("targetVariable: 1,");
+      _builder.append("targetVariable: 0,");
       _builder.newLine();
       _builder.append("\t ");
       _builder.append("algorithm: SVM,");
@@ -172,7 +179,9 @@ public class MLRegParsingTest {
       final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
       boolean _isEmpty = errors.isEmpty();
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("Unexpected errors: errors.join(\", \")");
+      _builder_1.append("Unexpected errors: ");
+      String _join = IterableExtensions.join(errors, ", ");
+      _builder_1.append(_join);
       Assertions.assertTrue(_isEmpty, _builder_1.toString());
       final PythonCompiler cmpPython = new PythonCompiler(result);
       cmpPython.compileAndRun();
@@ -182,22 +191,104 @@ public class MLRegParsingTest {
   }
   
   @Test
-  public void testTreeReg() {
+  public void testSVMReg2() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("regression{");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("file: \"datasets/salary_data.csv\",");
+      _builder.append("file: \"datasets/ozone.csv\",");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("testSize : 3,");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("predictiveVariables : {0},");
+      _builder.append("predictiveVariables : {2,3,4},");
       _builder.newLine();
       _builder.append("\t ");
-      _builder.append("targetVariable: 1,");
+      _builder.append("targetVariable: 0,");
+      _builder.newLine();
+      _builder.append("\t ");
+      _builder.append("algorithm: SVM,");
+      _builder.newLine();
+      _builder.append("\t ");
+      _builder.append("errorType: explained_variance_score");
+      _builder.newLine();
+      _builder.append("}\t\t");
+      final Model result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
+      boolean _isEmpty = errors.isEmpty();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("Unexpected errors: ");
+      String _join = IterableExtensions.join(errors, ", ");
+      _builder_1.append(_join);
+      Assertions.assertTrue(_isEmpty, _builder_1.toString());
+      final PythonCompiler cmpPython = new PythonCompiler(result);
+      cmpPython.compileAndRun();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSVMReg3() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("regression{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("file: \"datasets/ozone.csv\",");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("testSize : 3,");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("predictiveVariables : {2,3,4},");
+      _builder.newLine();
+      _builder.append("\t ");
+      _builder.append("targetVariable: 0,");
+      _builder.newLine();
+      _builder.append("\t ");
+      _builder.append("algorithm: SVM,");
+      _builder.newLine();
+      _builder.append("\t ");
+      _builder.append("errorType: r2_score");
+      _builder.newLine();
+      _builder.append("}\t\t");
+      final Model result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
+      boolean _isEmpty = errors.isEmpty();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("Unexpected errors: ");
+      String _join = IterableExtensions.join(errors, ", ");
+      _builder_1.append(_join);
+      Assertions.assertTrue(_isEmpty, _builder_1.toString());
+      final PythonCompiler cmpPython = new PythonCompiler(result);
+      cmpPython.compileAndRun();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testTreeReg1() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("regression{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("file: \"datasets/ozone.csv\",");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("testSize : 3,");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("predictiveVariables : {1,5},");
+      _builder.newLine();
+      _builder.append("\t ");
+      _builder.append("targetVariable: 0,");
       _builder.newLine();
       _builder.append("\t ");
       _builder.append("algorithm: RegressionTree,");
@@ -211,7 +302,91 @@ public class MLRegParsingTest {
       final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
       boolean _isEmpty = errors.isEmpty();
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("Unexpected errors: errors.join(\", \")");
+      _builder_1.append("Unexpected errors: ");
+      String _join = IterableExtensions.join(errors, ", ");
+      _builder_1.append(_join);
+      Assertions.assertTrue(_isEmpty, _builder_1.toString());
+      final PythonCompiler cmpPython = new PythonCompiler(result);
+      cmpPython.compileAndRun();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testTreeReg2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("regression{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("file: \"datasets/ozone.csv\",");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("testSize : 3,");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("predictiveVariables : {1,5},");
+      _builder.newLine();
+      _builder.append("\t ");
+      _builder.append("targetVariable: 0,");
+      _builder.newLine();
+      _builder.append("\t ");
+      _builder.append("algorithm: RegressionTree,");
+      _builder.newLine();
+      _builder.append("\t ");
+      _builder.append("errorType: explained_variance_score");
+      _builder.newLine();
+      _builder.append("}\t\t");
+      final Model result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
+      boolean _isEmpty = errors.isEmpty();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("Unexpected errors: ");
+      String _join = IterableExtensions.join(errors, ", ");
+      _builder_1.append(_join);
+      Assertions.assertTrue(_isEmpty, _builder_1.toString());
+      final PythonCompiler cmpPython = new PythonCompiler(result);
+      cmpPython.compileAndRun();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testTreeReg3() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("regression{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("file: \"datasets/ozone.csv\",");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("testSize : 3,");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("predictiveVariables : {1,5},");
+      _builder.newLine();
+      _builder.append("\t ");
+      _builder.append("targetVariable: 0,");
+      _builder.newLine();
+      _builder.append("\t ");
+      _builder.append("algorithm: RegressionTree,");
+      _builder.newLine();
+      _builder.append("\t ");
+      _builder.append("errorType: r2_score");
+      _builder.newLine();
+      _builder.append("}\t\t");
+      final Model result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
+      boolean _isEmpty = errors.isEmpty();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("Unexpected errors: ");
+      String _join = IterableExtensions.join(errors, ", ");
+      _builder_1.append(_join);
       Assertions.assertTrue(_isEmpty, _builder_1.toString());
       final PythonCompiler cmpPython = new PythonCompiler(result);
       cmpPython.compileAndRun();

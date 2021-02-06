@@ -11,32 +11,27 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.^extension.ExtendWith
 import org.xtext.idmGH.mlregDsl.mLReg.Model
-import org.xtext.idmGH.mlregDsl.tests.PythonCompiler
-import org.xtext.idmGH.mlregDsl.tests.RCompiler
-
-
 
 @ExtendWith(InjectionExtension)
 @InjectWith(MLRegInjectorProvider)
 class MLRegParsingTest {
 	@Inject
 	ParseHelper<Model> parseHelper
-	
 
 	@Test
 	def void testLinearReg1() {
 		val result = parseHelper.parse('''
 		regression{
-			file: "datasets/salary_data.csv",
+			file: "datasets/ozone.csv",
 			testSize : 3,
-			predictiveVariables : {0},
-			 targetVariable: 1,
+			predictiveVariables : {1},
+			 targetVariable: 0,
 			 algorithm: Linear,
 			 errorType: mean_squared_error
 		}		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors
-		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: errors.join(", ")''')
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
 
 		val PythonCompiler cmpPython = new PythonCompiler(result)
 		cmpPython.compileAndRun
@@ -55,7 +50,7 @@ class MLRegParsingTest {
 		}		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors
-		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: errors.join(", ")''')
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
 
 		val PythonCompiler cmpPython = new PythonCompiler(result)
 		cmpPython.compileAndRun
@@ -70,51 +65,128 @@ class MLRegParsingTest {
 			predictiveVariables : {1,2,9,10},
 			 targetVariable: 0,
 			 algorithm: Linear,
-			 errorType: r2_score
+			 errorType: explained_variance_score
 		}		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors
-		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: errors.join(", ")''')
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
 
 		val PythonCompiler cmpPython = new PythonCompiler(result)
 		cmpPython.compileAndRun
 	}
 
 	@Test
-	def void testSVMReg() {
+	def void testSVMReg1() {
 		val result = parseHelper.parse('''
 		regression{
-			file: "datasets/salary_data.csv",
+			file: "datasets/ozone.csv",
 			testSize : 3,
-			predictiveVariables : {0},
-			 targetVariable: 1,
+			predictiveVariables : {2,3,4},
+			 targetVariable: 0,
 			 algorithm: SVM,
 			 errorType: mean_squared_error
 		}		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors
-		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: errors.join(", ")''')
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+
+		val PythonCompiler cmpPython = new PythonCompiler(result)
+		cmpPython.compileAndRun
+	}
+	
+	@Test
+	def void testSVMReg2() {
+		val result = parseHelper.parse('''
+		regression{
+			file: "datasets/ozone.csv",
+			testSize : 3,
+			predictiveVariables : {2,3,4},
+			 targetVariable: 0,
+			 algorithm: SVM,
+			 errorType: explained_variance_score
+		}		''')
+		Assertions.assertNotNull(result)
+		val errors = result.eResource.errors
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+
+		val PythonCompiler cmpPython = new PythonCompiler(result)
+		cmpPython.compileAndRun
+	}
+	
+	@Test
+	def void testSVMReg3() {
+		val result = parseHelper.parse('''
+		regression{
+			file: "datasets/ozone.csv",
+			testSize : 3,
+			predictiveVariables : {2,3,4},
+			 targetVariable: 0,
+			 algorithm: SVM,
+			 errorType: r2_score
+		}		''')
+		Assertions.assertNotNull(result)
+		val errors = result.eResource.errors
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
 
 		val PythonCompiler cmpPython = new PythonCompiler(result)
 		cmpPython.compileAndRun
 	}
 
 	@Test
-	def void testTreeReg() {
+	def void testTreeReg1() {
 		val result = parseHelper.parse('''
 		regression{
-			file: "datasets/salary_data.csv",
+			file: "datasets/ozone.csv",
 			testSize : 3,
-			predictiveVariables : {0},
-			 targetVariable: 1,
+			predictiveVariables : {1,5},
+			 targetVariable: 0,
 			 algorithm: RegressionTree,
 			 errorType: mean_squared_error
 		}		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors
-		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: errors.join(", ")''')
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
 
 		val PythonCompiler cmpPython = new PythonCompiler(result)
 		cmpPython.compileAndRun
 	}
+	
+	@Test
+	def void testTreeReg2() {
+		val result = parseHelper.parse('''
+		regression{
+			file: "datasets/ozone.csv",
+			testSize : 3,
+			predictiveVariables : {1,5},
+			 targetVariable: 0,
+			 algorithm: RegressionTree,
+			 errorType: explained_variance_score
+		}		''')
+		Assertions.assertNotNull(result)
+		val errors = result.eResource.errors
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+
+		val PythonCompiler cmpPython = new PythonCompiler(result)
+		cmpPython.compileAndRun
+	}
+	
+	@Test
+	def void testTreeReg3() {
+		val result = parseHelper.parse('''
+		regression{
+			file: "datasets/ozone.csv",
+			testSize : 3,
+			predictiveVariables : {1,5},
+			 targetVariable: 0,
+			 algorithm: RegressionTree,
+			 errorType: r2_score
+		}		''')
+		Assertions.assertNotNull(result)
+		val errors = result.eResource.errors
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+
+		val PythonCompiler cmpPython = new PythonCompiler(result)
+		cmpPython.compileAndRun
+	}
+	
 }

@@ -38,25 +38,26 @@ public class PythonCompiler {
 				+ "from sklearn.model_selection import train_test_split\n" + "from sklearn import tree\n"
 				+ "from sklearn.linear_model import LinearRegression\n" + "from sklearn import svm\n"
 				+ "from sklearn.metrics import r2_score\n" + "from sklearn.metrics import explained_variance_score\n"
-				+ "from sklearn.metrics import mean_squared_error\n" + "df = pd.read_csv(\"" + csvFile + "\")\n";// ,
-																													// header=None)\n";
-
+				+ "from sklearn.metrics import mean_squared_error\n" + "df = pd.read_csv(\"" + csvFile + "\")\n";
+		
 		// Spliting dataset between features (X) and label (y)
 		pythonCode += "X = df.iloc[: ,[" + colVarsString + "]]\n";
 		pythonCode += "y = df.iloc[: ," + targetVar + "]\n";
 
 		// Spliting into LearningSet and TestSet
-		System.out.println("test size : " + testSize);
 		pythonCode += "X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0." + testSize
 				+ ", random_state=0)\n";
 
 		// Set algorithm to use
 		if (algo.equalsIgnoreCase("linear")) {
 			pythonCode += "mlreg = LinearRegression()\n";
+			pythonCode += "print(\"Algo : Linear\")\n";
 		} else if (algo.equalsIgnoreCase("svm")) {
 			pythonCode += "mlreg = svm.SVR()\n";
+			pythonCode += "print(\"Algo : SVM\")\n";
 		} else if (algo.equalsIgnoreCase("regressiontree")) {
 			pythonCode += "mlreg = tree.DecisionTreeRegressor()\n";
+			pythonCode += "print(\"Algo : Regression Tree\")\n";
 		}
 
 		// Use the algorithm to create a model with the training set
@@ -71,17 +72,19 @@ public class PythonCompiler {
 		// Set error measure to use
 		if (errorMeasure.equalsIgnoreCase("mean_squared_error")) {
 			pythonCode += "error = mean_squared_error(y_test, y_prediction)\n";
+			pythonCode += "print(\"mean_squared_error = \", error)\n";
 		} else if (errorMeasure.equalsIgnoreCase("explained_variance_score")) {
 			pythonCode += "error = explained_variance_score(y_test, y_prediction)\n";
+			pythonCode += "print(\"explained_variance_score =\", error)\n";
 		} else if (errorMeasure.equalsIgnoreCase("r2_score")) {
 			pythonCode += "error = r2_score(y_test, y_prediction)\n";
+			pythonCode += "print(\"r2_score =\", error)\n";
 		}
-		pythonCode += "print(\"Error : \", error)\n";
 
 		// serialize code into Python filename
 
 		csvFile = csvFile.substring(csvFile.lastIndexOf("/")).replace("/", "");
-		String PYTHON_OUTPUT = "python_outputs/" + csvFile.replaceAll(".csv", "") + "_" + algo + ".py";
+		String PYTHON_OUTPUT = "python_outputs/" + csvFile.replaceAll(".csv", "") + "_" + algo + "_" + errorMeasure + ".py";
 		Files.write(pythonCode.getBytes(), new File(PYTHON_OUTPUT));
 		Process p = Runtime.getRuntime().exec("python " + PYTHON_OUTPUT);
 		BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
