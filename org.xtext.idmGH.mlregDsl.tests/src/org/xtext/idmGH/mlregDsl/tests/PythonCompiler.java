@@ -34,11 +34,16 @@ public class PythonCompiler {
 		String algo = mlRegression.getAlgorithm().getAlgoName().getName();
 		String errorMeasure = mlRegression.getErrorMeasure().getErrorMeasure().getName();
 
-		String pythonCode = "import pandas as pd\n" + "import matplotlib.pyplot as plt\n"
+		// Getting starting time
+		String pythonCode = "import time\n";
+		pythonCode += "start_time = time.time()\n";
+
+		pythonCode += "import pandas as pd\n" + "import matplotlib.pyplot as plt\n"
 				+ "from sklearn.model_selection import train_test_split\n" + "from sklearn import tree\n"
 				+ "from sklearn.linear_model import LinearRegression\n" + "from sklearn import svm\n"
 				+ "from sklearn.metrics import r2_score\n" + "from sklearn.metrics import explained_variance_score\n"
 				+ "from sklearn.metrics import mean_squared_error\n" + "df = pd.read_csv(\"" + csvFile + "\")\n";
+
 
 		// Spliting dataset between features (X) and label (y)
 		pythonCode += "X = df.iloc[: ,[" + colVarsString + "]]\n";
@@ -62,7 +67,7 @@ public class PythonCompiler {
 
 		// Use the algorithm to create a model with the training set
 		pythonCode += "mlreg.fit(X_train, y_train)\n";
-		
+
 		// Prediction
 		pythonCode += "y_prediction = mlreg.predict(X_test)\n";
 		pythonCode += "df_prediction = pd.DataFrame({'Actual': y_test, 'Predicted': y_prediction})\n";
@@ -81,15 +86,17 @@ public class PythonCompiler {
 			pythonCode += "print(\"r2_score =\", error)\n";
 		}
 
+		// Excution time
+		pythonCode += "end_time = time.time()\n";
+
 		// Benchmarks Utils
 		pythonCode += "import csv\n";
-		pythonCode += "stats = [\"" + csvFile + "\", 'Pythonscikit-learn', y_prediction, 'time', error]\n";
-		pythonCode += "f = open('statistics/benchmark.csv', 'w')\n";
+		pythonCode += "f = open('statistics/benchmark.csv', 'a')\n";
 		pythonCode += "with f: \n";
-		pythonCode += "	fnames = ['benchmark', 'variant', 'prediction result', 'Error measure', 'Time']\n";
+		pythonCode += "	fnames = ['benchmark', 'variant', 'prediction result', 'Error measure', 'Execution time']\n";
 		pythonCode += "	writer = csv.DictWriter(f, fieldnames=fnames)\n";
 		pythonCode += "	writer.writeheader()\n";
-		pythonCode += "	writer.writerow({'benchmark' : \"" + csvFile + "\", 'variant': 'Python scikit-learn', 'prediction result': y_prediction, 'Error measure': error, 'Time': 'dfjlskjdf'})\n";
+		pythonCode += "	writer.writerow({'benchmark' : \"" + csvFile + "\", 'variant': 'Python scikit-learn', 'prediction result': y_prediction, 'Error measure': error, 'Execution time': (end_time-start_time)})\n";
 		//pythonCode += "	writer.writerow(stats)";
 
 		// serialize code into Python filename
