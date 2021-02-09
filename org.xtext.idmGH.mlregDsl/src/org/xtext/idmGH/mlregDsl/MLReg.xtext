@@ -49,7 +49,7 @@ ErrorMeasure:
 ;
 
 enum ErrorCalculation:
-	mean_squared_error = 'mean_squared_error' |  explained_variance_score  = 'explained_variance_score' | r2_score = 'r2_score'
+	mean_squared_error = 'mean_squared_error' |  mean_absolute_error  = 'mean_absolute_error' | r2_score = 'r2_score'
 ;	
 
 ColVar:
