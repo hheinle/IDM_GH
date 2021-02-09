@@ -24,7 +24,7 @@ public class MLRegParsingTest_R {
   public void testLinearReg1() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("regression {file: \"datasets/ozone.csv\", testSize: 30, predictiveVariables: {2}, targetVariable: 1, algorithm: RegressionTree, errorType: mean_squared_error}");
+      _builder.append("regression {file: \"datasets/ozone.csv\", testSize: 30, predictiveVariables: {2}, targetVariable: 1, algorithm: SVM, errorType: mean_absolute_error}");
       final Model result = this.parseHelper.parse(_builder);
       Assertions.assertNotNull(result);
       final RCompiler cmpR = new RCompiler(result);

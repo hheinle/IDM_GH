@@ -39,14 +39,9 @@ public class RCompiler {
 		String algorithm = mlReg.getAlgorithm().getAlgoName().getName();
 		String errorType = mlReg.getErrorMeasure().getErrorMeasure().getName();
 		String targetVarR = Integer.toString(targetVar);
-		/**Iterator<Integer> it = listPredictiveVars.iterator();
-		String predictiveVarsR = it.next().toString();
-		while(it.hasNext()) {
-			predictiveVarsR += "+" + it.next();
-		}
-		System.out.println(predictiveVarsR);*/
 		String rCode = "library(e1071)\n";
 		rCode += "library(tree)\n";
+		rCode += "library(Metrics)\n";
 		rCode += "data <- read.csv(file =\"" + fileName + "\")\n";
 		rCode += "dt = sample(dim(data)[1], floor("+trainSize+"*nrow(data)[1]))\n";
 		//rCode += "dt = sort(sample(nrow(data), nrow(data)*"+ trainSize +"))\n";
@@ -73,7 +68,22 @@ public class RCompiler {
 			rCode += ", data=train";
 			rCode += ")\n";
 		}
-		rCode += "predict(model, test)\n";
+		rCode += "prediction=predict(model, test)\n";
+		rCode+= "data.frame(test[1], valeurs_prédites=unlist(prediction))\n";
+		rCode += "actual=as.vector(t(test[1]))\n";
+
+		if(errorType.equalsIgnoreCase("mean_squared_error")) {
+			rCode += "print(\"RMS\")\n";
+			rCode += "rmse(actual, prediction)\n";
+		}
+		else if(errorType.equalsIgnoreCase("mean_absolute_error")) {
+			rCode += "print(\"MAE\")\n";
+			rCode += "mae(actual, prediction)\n";
+		}
+		else if(errorType.equalsIgnoreCase("r2_score")) {
+			rCode += "print(\"R2\")\n";
+			rCode += "cor(actual, prediction)^2\n";
+		}
 		
         String R_OUTPUT = "R_outputs/foo1.r";
         
@@ -81,7 +91,6 @@ public class RCompiler {
 
         // execute the generated Python code
         // roughly: exec "r -f foo.r"
-        System.out.print(R_OUTPUT);
         Process p = Runtime.getRuntime().exec("Rscript " + R_OUTPUT);
 
         // output
