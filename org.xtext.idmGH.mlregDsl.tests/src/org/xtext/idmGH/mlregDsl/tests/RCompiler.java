@@ -24,6 +24,7 @@ public class RCompiler {
 	}
 	
 	public void compileAndRun() throws IOException {
+		long startTime = System.nanoTime();
 		MlRegression mlReg = _model.getMlRegression();
 		String fileName = mlReg.getCsvFile().getCsvFile();
 		System.out.println(fileName);
@@ -69,21 +70,31 @@ public class RCompiler {
 			rCode += ")\n";
 		}
 		rCode += "prediction=predict(model, test)\n";
-		rCode+= "data.frame(test[1], valeurs_prédites=unlist(prediction))\n";
+		rCode += "data.frame(test[1], valeurs_prédites=unlist(prediction))\n";
 		rCode += "actual=as.vector(t(test[1]))\n";
 
-		if(errorType.equalsIgnoreCase("mean_squared_error")) {
-			rCode += "print(\"RMS\")\n";
-			rCode += "rmse(actual, prediction)\n";
+		if(errorType.equalsIgnoreCase("root_mean_squared_error")) {
+			rCode += "print(\"RMSE\")\n";
+			rCode += "error <<- rmse(actual, prediction)\n";
+			rCode += "print(error)\n";
 		}
 		else if(errorType.equalsIgnoreCase("mean_absolute_error")) {
 			rCode += "print(\"MAE\")\n";
-			rCode += "mae(actual, prediction)\n";
+			rCode += "error <<- mae(actual, prediction)\n";
+			rCode += "print(error)\n";
 		}
 		else if(errorType.equalsIgnoreCase("r2_score")) {
 			rCode += "print(\"R2\")\n";
-			rCode += "cor(actual, prediction)^2\n";
+			rCode += "error <<- cor(actual, prediction)^2\n";
+			rCode += "print(error)\n";
 		}
+		long endTime = System.nanoTime();
+		double durationMs = (endTime - startTime) / (double) 1000000;
+		
+		rCode += "line=paste('"+ algorithm +","+listPredictiveVars.toString()+","+targetVar+","+durationMs+","+errorType+"',',')\n";
+		rCode += "line=paste(line,error)\n";
+		rCode += "write(line,file=\"statistics/benchmark_R.csv\",append=TRUE)\n";
+
 		
         String R_OUTPUT = "R_outputs/foo1.r";
         
