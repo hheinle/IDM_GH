@@ -36,10 +36,8 @@ public class PythonCompiler {
 		String errorMeasure = mlRegression.getErrorMeasure().getErrorMeasure().getName();
 
 		// Getting starting time
-		String pythonCode = "import time\n";
-		pythonCode += "start_time = time.time()\n";
 
-		pythonCode += "import pandas as pd\n" + "import matplotlib.pyplot as plt\n"
+		String pythonCode = "import pandas as pd\n" + "import matplotlib.pyplot as plt\n"
 				+ "from sklearn.model_selection import train_test_split\n" + "from sklearn import tree\n"
 				+ "from sklearn.linear_model import LinearRegression\n" + "from sklearn import svm\n"
 				+ "from sklearn.metrics import r2_score\n" + "from sklearn.metrics import mean_absolute_error\n"

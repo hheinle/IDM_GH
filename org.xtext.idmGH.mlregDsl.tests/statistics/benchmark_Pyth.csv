@@ -1,15 +1,13 @@
-Linear,"[1, 2, 9, 10]",0,0.3368,mean_absolute_error,9.201847333616763
-Linear,"[1, 2, 9, 10]",0,0.121,mean_absolute_error,13.667510005873778
-Linear,"[1, 2, 9, 10]",0,0.1213,r2_score,0.7195232680182521
-Linear,[1],0,0.1049,r2_score,0.4440720667668674
-SVM,[1],0,0.1846,root_mean_squared_error,24.212890747347863
-Regression Tree,"[1, 2, 9, 10]",0,0.4222,mean_absolute_error,14.516129032258064
-Regression Tree,[1],0,0.0758,mean_absolute_error,21.463978494623657
-Regression Tree,"[1, 2, 9, 10]",0,0.0968,root_mean_squared_error,26.74732425568415
-SVM,[1],0,0.1181,r2_score,0.24965948544197814
-Linear,[1],0,0.0871,root_mean_squared_error,19.63990413066342
-Regression Tree,"[1, 2, 9, 10]",0,0.107,r2_score,0.5913738343175081
-SVM,"[1, 2, 9, 10]",0,0.1213,r2_score,0.1492603030730364
-Linear,[1],0,0.1004,r2_score,0.5825278883395426
-SVM,"[1, 2, 9, 10]",0,0.0881,root_mean_squared_error,32.108030739375806
-Linear,"[1, 2, 9, 10]",0,0.1008,root_mean_squared_error,18.40078906722848
+Algorithme,Variable(s) predictrice(s), Variable cible, Duree (ms), Type Erreur, Erreur
+SVM,"[1, 2, 9, 10]",0,0.4276,mean_absolute_error,21.083788647457478
+Linear,"[1, 2, 9, 10]",0,0.1027,mean_absolute_error,11.50692523992907
+SVM,[1],0,0.0936,root_mean_squared_error,31.02576324786124
+Regression Tree,[1],0,0.1309,mean_absolute_error,17.930107526881716
+Regression Tree,[1],0,0.0787,root_mean_squared_error,25.419579420618803
+Linear,[1],0,0.0744,mean_absolute_error,15.1246965210521
+Linear,"[1, 2, 9, 10]",0,0.9917,root_mean_squared_error,13.609880799624579
+Linear,[1],0,0.0911,root_mean_squared_error,17.37449741663971
+Regression Tree,"[1, 2, 9, 10]",0,0.1386,mean_absolute_error,12.290322580645162
+SVM,[1],0,0.0921,mean_absolute_error,17.236629392627773
+SVM,"[1, 2, 9, 10]",0,0.0945,root_mean_squared_error,13.782975343025942
+Regression Tree,"[1, 2, 9, 10]",0,0.0816,root_mean_squared_error,17.84792388757791
