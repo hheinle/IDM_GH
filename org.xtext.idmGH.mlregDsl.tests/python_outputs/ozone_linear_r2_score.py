@@ -7,25 +7,26 @@ from sklearn import tree
 from sklearn.linear_model import LinearRegression
 from sklearn import svm
 from sklearn.metrics import r2_score
-from sklearn.metrics import explained_variance_score
+from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import mean_squared_error
 df = pd.read_csv("datasets/ozone.csv")
-X = df.iloc[: ,[1,2,3,4,5,6,7,8,9,10,]]
+X = df.iloc[: ,[1,]]
 y = df.iloc[: ,0]
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 mlreg = LinearRegression()
-print("Algo : Linear")
+algo = "Linear"
+print(algo)
 mlreg.fit(X_train, y_train)
 y_prediction = mlreg.predict(X_test)
-df_prediction = pd.DataFrame({'Actual': y_test, 'Predicted': y_prediction})
-print("df_prediction : ", df_prediction)
+print("Target variable : ", 0)
+print("Predictive variable(s) : ", 1,)
 error = r2_score(y_test, y_prediction)
-print("r2_score =", error)
-end_time = time.time()
+errorName = "r2_score"
+print(errorName)
+print(error)
 import csv
-f = open('statistics/benchmark.csv', 'a')
+row = [algo, [1,], 0, 0.1004, errorName, error]
+f = open('statistics/benchmark_Pyth.csv', 'a')
 with f: 
-	fnames = ['benchmark', 'variant', 'prediction result', 'Error measure', 'Execution time']
-	writer = csv.DictWriter(f, fieldnames=fnames)
-	writer.writeheader()
-	writer.writerow({'benchmark' : "datasets/ozone.csv", 'variant': 'Python scikit-learn', 'prediction result': y_prediction, 'Error measure': error, 'Execution time': (end_time-start_time)})
+	writer = csv.writer(f)
+	writer.writerow(row)

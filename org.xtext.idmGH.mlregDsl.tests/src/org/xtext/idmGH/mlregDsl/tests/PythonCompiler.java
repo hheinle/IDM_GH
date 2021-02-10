@@ -19,6 +19,7 @@ public class PythonCompiler {
 	}
 
 	public void compileAndRun() throws IOException {
+		long startTime = System.nanoTime();
 
 		MlRegression mlRegression = this.model.getMlRegression();
 		String csvFile = mlRegression.getCsvFile().getCsvFile();
@@ -41,7 +42,7 @@ public class PythonCompiler {
 		pythonCode += "import pandas as pd\n" + "import matplotlib.pyplot as plt\n"
 				+ "from sklearn.model_selection import train_test_split\n" + "from sklearn import tree\n"
 				+ "from sklearn.linear_model import LinearRegression\n" + "from sklearn import svm\n"
-				+ "from sklearn.metrics import r2_score\n" + "from sklearn.metrics import explained_variance_score\n"
+				+ "from sklearn.metrics import r2_score\n" + "from sklearn.metrics import mean_absolute_error\n"
 				+ "from sklearn.metrics import mean_squared_error\n" + "df = pd.read_csv(\"" + csvFile + "\")\n";
 
 
@@ -51,18 +52,21 @@ public class PythonCompiler {
 
 		// Spliting into LearningSet and TestSet
 		pythonCode += "X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0." + testSize
-				+ ", random_state=0)\n";
+				+ ")\n";
 
 		// Set algorithm to use
 		if (algo.equalsIgnoreCase("linear")) {
 			pythonCode += "mlreg = LinearRegression()\n";
-			pythonCode += "print(\"Algo : Linear\")\n";
+			pythonCode += "algo = \"Linear\"\n";
+			pythonCode += "print(algo)\n";
 		} else if (algo.equalsIgnoreCase("svm")) {
 			pythonCode += "mlreg = svm.SVR()\n";
-			pythonCode += "print(\"Algo : SVM\")\n";
+			pythonCode += "algo = \"SVM\"\n";
+			pythonCode += "print(algo)\n";
 		} else if (algo.equalsIgnoreCase("regressiontree")) {
 			pythonCode += "mlreg = tree.DecisionTreeRegressor()\n";
-			pythonCode += "print(\"Algo : Regression Tree\")\n";
+			pythonCode += "algo = \"Regression Tree\"\n";
+			pythonCode += "print(algo)\n";
 		}
 
 		// Use the algorithm to create a model with the training set
@@ -70,35 +74,46 @@ public class PythonCompiler {
 
 		// Prediction
 		pythonCode += "y_prediction = mlreg.predict(X_test)\n";
-		pythonCode += "df_prediction = pd.DataFrame({'Actual': y_test, 'Predicted': y_prediction})\n";
-		pythonCode += "print(\"df_prediction : \", df_prediction)\n";
+
+		// Printing predictive vars and targetVar
+		pythonCode += "print(\"Target variable : \", "+ targetVar +")\n";
+		pythonCode += "print(\"Predictive variable(s) : \", "+ colVarsString +")\n";
+		// Printing prediction vs reality
+		//pythonCode += "df_prediction = pd.DataFrame({'Actual': y_test, 'Predicted': y_prediction})\n";
+		//pythonCode += "print(\"df_prediction : \", df_prediction)\n";
 
 		// Compute and display the error
 		// Set error measure to use
-		if (errorMeasure.equalsIgnoreCase("mean_squared_error")) {
-			pythonCode += "error = mean_squared_error(y_test, y_prediction)\n";
-			pythonCode += "print(\"mean_squared_error = \", error)\n";
-		} else if (errorMeasure.equalsIgnoreCase("explained_variance_score")) {
-			pythonCode += "error = explained_variance_score(y_test, y_prediction)\n";
-			pythonCode += "print(\"explained_variance_score =\", error)\n";
+		if (errorMeasure.equalsIgnoreCase("root_mean_squared_error")) {
+			pythonCode += "error = mean_squared_error(y_test, y_prediction, squared=False)\n";
+			pythonCode += "errorName = \"root_mean_squared_error\"\n";
+			pythonCode += "print(errorName)\n";
+			pythonCode += "print(error)\n";
+		} else if (errorMeasure.equalsIgnoreCase("mean_absolute_error")) {
+			pythonCode += "error = mean_absolute_error(y_test, y_prediction)\n";
+			pythonCode += "errorName = \"mean_absolute_error\"\n";
+			pythonCode += "print(errorName)\n";
+			pythonCode += "print(error)\n";
 		} else if (errorMeasure.equalsIgnoreCase("r2_score")) {
 			pythonCode += "error = r2_score(y_test, y_prediction)\n";
-			pythonCode += "print(\"r2_score =\", error)\n";
+			pythonCode += "errorName = \"r2_score\"\n";
+			pythonCode += "print(errorName)\n";
+			pythonCode += "print(error)\n";
 		}
 
 		// Excution time
-		pythonCode += "end_time = time.time()\n";
+		long endTime = System.nanoTime();
+		double durationMs = (endTime - startTime) / (double) 1000000;
 
 		// Benchmarks Utils
 		pythonCode += "import csv\n";
-		pythonCode += "f = open('statistics/benchmark.csv', 'a')\n";
+		pythonCode += "row = [algo, ["+colVarsString+"], "+targetVar+", "+durationMs+", errorName, error]";
+		pythonCode += "\n";
+		pythonCode += "f = open('statistics/benchmark_Pyth.csv', 'a')\n";
 		pythonCode += "with f: \n";
-		pythonCode += "	fnames = ['benchmark', 'variant', 'prediction result', 'Error measure', 'Execution time']\n";
-		pythonCode += "	writer = csv.DictWriter(f, fieldnames=fnames)\n";
-		pythonCode += "	writer.writeheader()\n";
-		pythonCode += "	writer.writerow({'benchmark' : \"" + csvFile + "\", 'variant': 'Python scikit-learn', 'prediction result': y_prediction, 'Error measure': error, 'Execution time': (end_time-start_time)})\n";
-		//pythonCode += "	writer.writerow(stats)";
-
+		pythonCode += "	writer = csv.writer(f)\n";
+		pythonCode += "	writer.writerow(row)\n";
+		
 		// serialize code into Python filename
 		csvFile = csvFile.substring(csvFile.lastIndexOf("/")).replace("/", "");
 		String PYTHON_OUTPUT = "python_outputs/" + csvFile.replaceAll(".csv", "") + "_" + algo + "_" + errorMeasure + ".py";
@@ -114,8 +129,6 @@ public class PythonCompiler {
 		while ((err = stdError.readLine()) != null) {
 			System.out.println(err);
 		}
-
-
 
 	}
 }

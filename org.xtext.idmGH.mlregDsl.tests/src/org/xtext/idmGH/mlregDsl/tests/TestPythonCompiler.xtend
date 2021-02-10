@@ -11,6 +11,11 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.^extension.ExtendWith
 import org.xtext.idmGH.mlregDsl.mLReg.Model
+import org.junit.jupiter.api.BeforeAll
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.io.File
+import com.google.common.base.Charsets
 
 @ExtendWith(InjectionExtension)
 @InjectWith(MLRegInjectorProvider)
@@ -19,7 +24,7 @@ class TestPythonCompiler {
 	ParseHelper<Model> parseHelper
 
 	@Test
-	def void testLinearReg1() {
+	def void testLinear10rmse() {
 		val result = parseHelper.parse('''
 		regression{
 			file: "datasets/ozone.csv",
@@ -27,7 +32,7 @@ class TestPythonCompiler {
 			predictiveVariables : {1},
 			 targetVariable: 0,
 			 algorithm: Linear,
-			 errorType: mean_squared_error
+			 errorType: rmse
 		}		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors
@@ -36,14 +41,14 @@ class TestPythonCompiler {
 		val PythonCompiler cmpPython = new PythonCompiler(result)
 		cmpPython.compileAndRun
 	}
-
+	
 	@Test
-	def void testLinearReg2() {
+	def void testLinear10r2() {
 		val result = parseHelper.parse('''
 		regression{
 			file: "datasets/ozone.csv",
 			testSize : 3,
-			predictiveVariables : {1,2,3,4,5,6,7,8,9,10},
+			predictiveVariables : {1},
 			 targetVariable: 0,
 			 algorithm: Linear,
 			 errorType: r2_score
@@ -55,9 +60,85 @@ class TestPythonCompiler {
 		val PythonCompiler cmpPython = new PythonCompiler(result)
 		cmpPython.compileAndRun
 	}
+	
+	@Test
+	def void testLinear10evs() {
+		val result = parseHelper.parse('''
+		regression{
+			file: "datasets/ozone.csv",
+			testSize : 3,
+			predictiveVariables : {1},
+			 targetVariable: 0,
+			 algorithm: Linear,
+			 errorType: r2_score
+		}		''')
+		Assertions.assertNotNull(result)
+		val errors = result.eResource.errors
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+
+		val PythonCompiler cmpPython = new PythonCompiler(result)
+		cmpPython.compileAndRun
+	}
+	
+	@Test
+	def void testSVM10rmse() {
+		val result = parseHelper.parse('''
+		regression{
+			file: "datasets/ozone.csv",
+			testSize : 3,
+			predictiveVariables : {1},
+			 targetVariable: 0,
+			 algorithm: SVM,
+			 errorType: rmse
+		}		''')
+		Assertions.assertNotNull(result)
+		val errors = result.eResource.errors
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+
+		val PythonCompiler cmpPython = new PythonCompiler(result)
+		cmpPython.compileAndRun
+	}
+	
+	@Test
+	def void testSVM10r2() {
+		val result = parseHelper.parse('''
+		regression{
+			file: "datasets/ozone.csv",
+			testSize : 3,
+			predictiveVariables : {1},
+			 targetVariable: 0,
+			 algorithm: SVM,
+			 errorType: r2_score
+		}		''')
+		Assertions.assertNotNull(result)
+		val errors = result.eResource.errors
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+
+		val PythonCompiler cmpPython = new PythonCompiler(result)
+		cmpPython.compileAndRun
+	}
+	
+	@Test
+	def void testSVM10mae() {
+		val result = parseHelper.parse('''
+		regression{
+			file: "datasets/ozone.csv",
+			testSize : 3,
+			predictiveVariables : {1},
+			 targetVariable: 0,
+			 algorithm: RegressionTree,
+			 errorType: mae
+		}		''')
+		Assertions.assertNotNull(result)
+		val errors = result.eResource.errors
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+
+		val PythonCompiler cmpPython = new PythonCompiler(result)
+		cmpPython.compileAndRun
+	}
 
 	@Test
-	def void testLinearReg3() {
+	def void testLinearMult0rmse() {
 		val result = parseHelper.parse('''
 		regression{
 			file: "datasets/ozone.csv",
@@ -65,7 +146,7 @@ class TestPythonCompiler {
 			predictiveVariables : {1,2,9,10},
 			 targetVariable: 0,
 			 algorithm: Linear,
-			 errorType: explained_variance_score
+			 errorType: rmse
 		}		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors
@@ -76,15 +157,15 @@ class TestPythonCompiler {
 	}
 
 	@Test
-	def void testSVMReg1() {
+	def void testLinearMult0r2() {
 		val result = parseHelper.parse('''
 		regression{
 			file: "datasets/ozone.csv",
 			testSize : 3,
-			predictiveVariables : {2,3,4},
+			predictiveVariables : {1,2,9,10},
 			 targetVariable: 0,
-			 algorithm: SVM,
-			 errorType: mean_squared_error
+			 algorithm: Linear,
+			 errorType: r2_score
 		}		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors
@@ -95,15 +176,15 @@ class TestPythonCompiler {
 	}
 	
 	@Test
-	def void testSVMReg2() {
+	def void testLinearMult0mae() {
 		val result = parseHelper.parse('''
 		regression{
 			file: "datasets/ozone.csv",
 			testSize : 3,
-			predictiveVariables : {2,3,4},
+			predictiveVariables : {1,2,9,10},
 			 targetVariable: 0,
-			 algorithm: SVM,
-			 errorType: explained_variance_score
+			 algorithm: Linear,
+			 errorType: mae
 		}		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors
@@ -114,12 +195,31 @@ class TestPythonCompiler {
 	}
 	
 	@Test
-	def void testSVMReg3() {
+	def void testSVMMult0rmse() {
 		val result = parseHelper.parse('''
 		regression{
 			file: "datasets/ozone.csv",
 			testSize : 3,
-			predictiveVariables : {2,3,4},
+			predictiveVariables : {1,2,9,10},
+			 targetVariable: 0,
+			 algorithm: SVM,
+			 errorType: rmse
+		}		''')
+		Assertions.assertNotNull(result)
+		val errors = result.eResource.errors
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+
+		val PythonCompiler cmpPython = new PythonCompiler(result)
+		cmpPython.compileAndRun
+	}
+
+	@Test
+	def void testSVMMult0r2() {
+		val result = parseHelper.parse('''
+		regression{
+			file: "datasets/ozone.csv",
+			testSize : 3,
+			predictiveVariables : {1,2,9,10},
 			 targetVariable: 0,
 			 algorithm: SVM,
 			 errorType: r2_score
@@ -131,17 +231,17 @@ class TestPythonCompiler {
 		val PythonCompiler cmpPython = new PythonCompiler(result)
 		cmpPython.compileAndRun
 	}
-
+	
 	@Test
-	def void testTreeReg1() {
+	def void testSVMMult0mae() {
 		val result = parseHelper.parse('''
 		regression{
 			file: "datasets/ozone.csv",
 			testSize : 3,
-			predictiveVariables : {1,5},
+			predictiveVariables : {1,2,9,10},
 			 targetVariable: 0,
-			 algorithm: RegressionTree,
-			 errorType: mean_squared_error
+			 algorithm: Linear,
+			 errorType: mae
 		}		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors
@@ -150,17 +250,18 @@ class TestPythonCompiler {
 		val PythonCompiler cmpPython = new PythonCompiler(result)
 		cmpPython.compileAndRun
 	}
-	
-	@Test
-	def void testTreeReg2() {
+
+
+@Test
+	def void testTreeMult0rmse() {
 		val result = parseHelper.parse('''
 		regression{
 			file: "datasets/ozone.csv",
 			testSize : 3,
-			predictiveVariables : {1,5},
+			predictiveVariables : {1,2,9,10},
 			 targetVariable: 0,
 			 algorithm: RegressionTree,
-			 errorType: explained_variance_score
+			 errorType: rmse
 		}		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors
@@ -169,14 +270,14 @@ class TestPythonCompiler {
 		val PythonCompiler cmpPython = new PythonCompiler(result)
 		cmpPython.compileAndRun
 	}
-	
+
 	@Test
-	def void testTreeReg3() {
+	def void testTreeMult0r2() {
 		val result = parseHelper.parse('''
 		regression{
 			file: "datasets/ozone.csv",
 			testSize : 3,
-			predictiveVariables : {1,5},
+			predictiveVariables : {1,2,9,10},
 			 targetVariable: 0,
 			 algorithm: RegressionTree,
 			 errorType: r2_score
@@ -188,5 +289,25 @@ class TestPythonCompiler {
 		val PythonCompiler cmpPython = new PythonCompiler(result)
 		cmpPython.compileAndRun
 	}
+	
+	@Test
+	def void testTreeMult0mae() {
+		val result = parseHelper.parse('''
+		regression{
+			file: "datasets/ozone.csv",
+			testSize : 3,
+			predictiveVariables : {1,2,9,10},
+			 targetVariable: 0,
+			 algorithm: RegressionTree,
+			 errorType: mae
+		}		''')
+		Assertions.assertNotNull(result)
+		val errors = result.eResource.errors
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+
+		val PythonCompiler cmpPython = new PythonCompiler(result)
+		cmpPython.compileAndRun
+	}
+	
 	
 }
