@@ -105,16 +105,17 @@ public class PythonCompiler {
 
 		// Benchmarks Utils
 		pythonCode += "import csv\n";
-		pythonCode += "row = [algo, ["+colVarsString+"], "+targetVar+", "+durationMs+", errorName, error]";
+		pythonCode += "row = [algo, ["+colVarsString+"], "+targetVar+", "+durationMs+", errorName, error];";
 		pythonCode += "\n";
-		pythonCode += "f = open('statistics/benchmark_Pyth.csv', 'a')\n";
+		pythonCode += "f = open('statistics/benchmark_Pyth.csv', 'a', newline=\"\")\n";
 		pythonCode += "with f: \n";
 		pythonCode += "	writer = csv.writer(f)\n";
-		pythonCode += "	writer.writerow(row)\n";
+		pythonCode += "	writer.writerow(row)";
 		
 		// serialize code into Python filename
 		csvFile = csvFile.substring(csvFile.lastIndexOf("/")).replace("/", "");
-		String PYTHON_OUTPUT = "python_outputs/" + csvFile.replaceAll(".csv", "") + "_" + algo + "_" + errorMeasure + ".py";
+		//String PYTHON_OUTPUT = "python_outputs/" + csvFile.replaceAll(".csv", "") + "_" + algo + "_" + errorMeasure + ".py";
+		String PYTHON_OUTPUT = "python_outputs/MLR.py";
 		Files.write(pythonCode.getBytes(), new File(PYTHON_OUTPUT));
 		Process p = Runtime.getRuntime().exec("python " + PYTHON_OUTPUT);
 		BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
