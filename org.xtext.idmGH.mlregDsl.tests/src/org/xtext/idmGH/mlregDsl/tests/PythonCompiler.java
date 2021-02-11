@@ -55,7 +55,7 @@ public class PythonCompiler {
 		// Set algorithm to use
 		if (algo.equalsIgnoreCase("linear")) {
 			pythonCode += "mlreg = LinearRegression()\n";
-			pythonCode += "algo = \"Linear\"\n";
+			pythonCode += "algo = \"linear\"\n";
 			pythonCode += "print(algo)\n";
 		} else if (algo.equalsIgnoreCase("svm")) {
 			pythonCode += "mlreg = svm.SVR()\n";
@@ -63,7 +63,7 @@ public class PythonCompiler {
 			pythonCode += "print(algo)\n";
 		} else if (algo.equalsIgnoreCase("regressiontree")) {
 			pythonCode += "mlreg = tree.DecisionTreeRegressor()\n";
-			pythonCode += "algo = \"Regression Tree\"\n";
+			pythonCode += "algo = \"regressionTree\"\n";
 			pythonCode += "print(algo)\n";
 		}
 
