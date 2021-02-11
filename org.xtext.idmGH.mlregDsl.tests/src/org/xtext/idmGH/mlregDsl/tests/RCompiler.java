@@ -85,7 +85,7 @@ public class RCompiler {
 		}
 		else if(errorType.equalsIgnoreCase("r2_score")) {
 			rCode += "print(\"R2\")\n";
-			rCode += "error <<- cor(actual, prediction)^2\n";
+			rCode += "error <<- (var(actual)-var(actual-prediction))/var(actual)\n";
 			rCode += "print(error)\n";
 		}
 		long endTime = System.nanoTime();
