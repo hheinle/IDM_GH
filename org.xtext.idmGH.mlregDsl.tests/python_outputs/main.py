@@ -1,18 +1,18 @@
-python python_outputs/dataset_linear_mean_absolute_error.py
-python python_outputs/dataset_linear_r2_score.py
-python python_outputs/dataset_linear_root_mean_squared_error.py
-python python_outputs/dataset_regressionTree_mean_absolute_error.py
-python python_outputs/dataset_regressionTree_r2_score.py
-python python_outputs/dataset_regressionTree_root_mean_squared_error.py
-python python_outputs/dataset_SVM_mean_absolute_error.py
-python python_outputs/dataset_SVM_r2_score.py
-python python_outputs/dataset_SVM_root_mean_squared_error.py
-python python_outputs/ozone_linear_mean_absolute_error.py
-python python_outputs/ozone_linear_r2_score.py
-python python_outputs/ozone_linear_root_mean_squared_error.py
-python python_outputs/ozone_regressionTree_mean_absolute_error.py
-python python_outputs/ozone_regressionTree_r2_score.py
-python python_outputs/ozone_regressionTree_root_mean_squared_error.py
-python python_outputs/ozone_SVM_mean_absolute_error.py
-python python_outputs/ozone_SVM_r2_score.py
-python python_outputs/ozone_SVM_root_mean_squared_error.py
+execfile("python_outputs/dataset_linear_mean_absolute_error.py")
+execfile("python_outputs/dataset_linear_r2_score.py")
+execfile("python_outputs/dataset_linear_root_mean_squared_error.py")
+execfile("python_outputs/dataset_regressionTree_mean_absolute_error.py")
+execfile("python_outputs/dataset_regressionTree_r2_score.py")
+execfile("python_outputs/dataset_regressionTree_root_mean_squared_error.py")
+execfile("python_outputs/dataset_SVM_mean_absolute_error.py")
+execfile("python_outputs/dataset_SVM_r2_score.py")
+execfile("python_outputs/dataset_SVM_root_mean_squared_error.py")
+execfile("python_outputs/ozone_linear_mean_absolute_error.py")
+execfile("python_outputs/ozone_linear_r2_score.py")
+execfile("python_outputs/ozone_linear_root_mean_squared_error.py")
+execfile("python_outputs/ozone_regressionTree_mean_absolute_error.py")
+execfile("python_outputs/ozone_regressionTree_r2_score.py")
+execfile("python_outputs/ozone_regressionTree_root_mean_squared_error.py")
+execfile("python_outputs/ozone_SVM_mean_absolute_error.py")
+execfile("python_outputs/ozone_SVM_r2_score.py")
+execfile("python_outputs/ozone_SVM_root_mean_squared_error.py")
