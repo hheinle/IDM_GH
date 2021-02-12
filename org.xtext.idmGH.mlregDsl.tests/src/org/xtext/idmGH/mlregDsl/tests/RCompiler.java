@@ -97,7 +97,6 @@ public class RCompiler {
         String R_OUTPUT = "r_outputs/" + fileName.replaceAll(".csv", "") + "_" + algorithm + "_" + errorType+ ".r";
         //String R_OUTPUT = "R_outputs/MLR.r";
         Files.write(rCode.getBytes(), new File(R_OUTPUT));
-        rCode += "cat(paste0(readLines(\"statistics/benchmark_R.csv\"), collapse=\"\\n\"))\r\n";
 
         // execute the generated Python code
         Process p = Runtime.getRuntime().exec("Rscript " + R_OUTPUT);
