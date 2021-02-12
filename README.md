@@ -20,7 +20,7 @@ de cours de M1 MIAGE sur les prévisions et d'internet. Nous avons pu lister des
 * erreur de prédiction
 
 Avec cette liste nous avons pu établir le métamodèle suivant qui nous a servi de base pour la construction de notre DSL.
-![Métamodèle](/assets/images/philly-magic-gardens.jpg "Métamodèle")
+![Métamodèle](metamodele_mlreg.jpeg "Métamodèle")
 
 ### Syntaxe concrète : la grammaire de notre DSL
 
@@ -45,3 +45,11 @@ Pour utiliser notre DSL, il faut :
 * cloner ce projet git et le visualiser depuis Eclipse DSL
 * compiler la [grammaire](org.xtext.idmGH.mlregDsl/src/org/xtext/idmGH/mlregDsl/MLReg.xtext)
 * 
+
+### Docker
+Nous avons créer des images Docker pour avoir des environnements disposant des dépendances Python et R. Vous trouverez le Dockerfile R [ici](https://github.com/hheinle/IDM_GH/tree/master/org.xtext.idmGH.mlregDsl.tests/r_docker) et le Dockerfile Python [ici](https://github.com/hheinle/IDM_GH/tree/master/org.xtext.idmGH.mlregDsl.tests/python_docker).
+Afin de pouvoir construire les images, il faut :
+* avoir Docker sur votre machine
+* avoir le plugin Docker tooling dans Eclipse IDE
+Il est alors possible de construire les images depuis les Dockerfile et de lancer les conteneurs associés depuis Eclipse.
+Nos Dockerfile permettent de lancer les fichiers ".r" ou ".py" obtenus depuis nos compilateurs.
