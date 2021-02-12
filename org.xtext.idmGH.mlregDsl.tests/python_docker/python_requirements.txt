@@ -1,4 +1,4 @@
-pip install pandas
-pip install scikit-learn
-pip install plot-lib
-pip install tree
+pandas
+scikit-learn
+plot-lib
+tree
