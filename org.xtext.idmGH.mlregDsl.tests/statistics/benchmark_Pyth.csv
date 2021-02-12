@@ -1,19 +1,19 @@
 Jeu de donnees, Algorithme,Variable(s) predictrice(s), Variable cible, Duree (ms), Type Erreur, Erreur
-datasets/dataset.csv,SVM,"[1, 2, 9, 10]",29,0.4856,mean_absolute_error,1.0912870468518008
-datasets/dataset.csv,linear,"[1, 2, 9, 10]",29,0.1555,mean_absolute_error,1.0686677862983622
-datasets/dataset.csv,SVM,[1],29,0.3169,root_mean_squared_error,1.466166277869065
-datasets/dataset.csv,SVM,[1],29,0.1808,r2_score,0.16705438598439826
-datasets/dataset.csv,regressionTree,[1],29,0.3596,mean_absolute_error,1.1078015502043177
-datasets/dataset.csv,SVM,"[1, 2, 9, 10]",29,0.0998,r2_score,0.19322987003510594
-datasets/dataset.csv,regressionTree,[1],29,0.1669,root_mean_squared_error,1.49318298755215
-datasets/dataset.csv,linear,[1],29,0.1015,mean_absolute_error,1.079583338767722
-datasets/dataset.csv,linear,"[1, 2, 9, 10]",29,0.1136,root_mean_squared_error,1.4262030209211323
-datasets/dataset.csv,linear,[1],29,0.1475,root_mean_squared_error,1.4072776258463378
-datasets/dataset.csv,regressionTree,"[1, 2, 9, 10]",29,0.1916,mean_absolute_error,1.2477108886483887
-datasets/dataset.csv,SVM,[1],29,0.1415,mean_absolute_error,1.0539799205106855
-datasets/dataset.csv,linear,"[1, 2, 9, 10]",29,0.1472,r2_score,0.24648313839464298
-datasets/dataset.csv,regressionTree,[1],29,0.1736,r2_score,0.1779874188737668
-datasets/dataset.csv,SVM,"[1, 2, 9, 10]",29,0.1938,root_mean_squared_error,1.3345700304232258
-datasets/dataset.csv,regressionTree,"[1, 2, 9, 10]",29,0.1628,r2_score,-0.48874808104056466
-datasets/dataset.csv,regressionTree,"[1, 2, 9, 10]",29,0.1638,root_mean_squared_error,1.9007241335589498
-datasets/dataset.csv,linear,[1],29,0.1708,r2_score,0.21921892738084425
+datasets/ozone.csv,SVM,"[1, 2, 9, 10]",0,0.3779,mean_absolute_error,22.21913255699699
+datasets/ozone.csv,linear,"[1, 2, 9, 10]",0,0.1283,mean_absolute_error,11.394167720179295
+datasets/ozone.csv,SVM,[1],0,0.1213,root_mean_squared_error,28.782743032471437
+datasets/ozone.csv,SVM,[1],0,0.1427,r2_score,-0.1554487814072456
+datasets/ozone.csv,regressionTree,[1],0,0.1807,mean_absolute_error,16.043010752688172
+datasets/ozone.csv,SVM,"[1, 2, 9, 10]",0,0.1035,r2_score,0.1730567319209847
+datasets/ozone.csv,regressionTree,[1],0,0.14,root_mean_squared_error,21.641320990030817
+datasets/ozone.csv,linear,[1],0,0.1428,mean_absolute_error,16.17973281738514
+datasets/ozone.csv,linear,"[1, 2, 9, 10]",0,0.1197,root_mean_squared_error,15.954947697265679
+datasets/ozone.csv,linear,[1],0,0.1393,root_mean_squared_error,18.551985065727578
+datasets/ozone.csv,regressionTree,"[1, 2, 9, 10]",0,0.1049,mean_absolute_error,17.70967741935484
+datasets/ozone.csv,SVM,[1],0,0.166,mean_absolute_error,19.1220918114446
+datasets/ozone.csv,linear,"[1, 2, 9, 10]",0,0.1716,r2_score,0.8642415958719403
+datasets/ozone.csv,regressionTree,[1],0,0.1663,r2_score,0.5203541669772087
+datasets/ozone.csv,SVM,"[1, 2, 9, 10]",0,0.2071,root_mean_squared_error,27.42563086939751
+datasets/ozone.csv,regressionTree,"[1, 2, 9, 10]",0,0.1017,r2_score,0.3081154547488153
+datasets/ozone.csv,regressionTree,"[1, 2, 9, 10]",0,0.1206,root_mean_squared_error,21.31106028152003
+datasets/ozone.csv,linear,[1],0,0.1026,r2_score,0.4286496573067914

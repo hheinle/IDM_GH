@@ -25,7 +25,7 @@ errorName = "r2_score"
 print(errorName)
 print(error)
 import csv
-row = ['datasets/ozone.csv', algo, [1], 0, 0.1683, errorName, error];
+row = ['datasets/ozone.csv', algo, [1], 0, 0.1026, errorName, error];
 f = open('statistics/benchmark_Pyth.csv', 'a', newline="")
 with f: 
 	writer = csv.writer(f)

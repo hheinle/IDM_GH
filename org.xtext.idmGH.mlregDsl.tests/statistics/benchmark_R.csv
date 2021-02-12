@@ -1,19 +1,19 @@
 Jeu de donnees;Algorithme;Variable(s) predictrice(s); Variable cible; Duree (ms); Type Erreur; Erreur
-datasets/dataset.csv;SVM;[2, 3, 10, 11];30;2.6816;mean_absolute_error;1.06351188314108
-datasets/dataset.csv;linear;[2, 3, 10, 11];30;0.1985;mean_absolute_error;1.1126681426253
-datasets/dataset.csv;SVM;[2];30;0.0923;root_mean_squared_error;1.42169120909668
-datasets/dataset.csv;SVM;[2];30;0.0935;r2_score;0.105047165604787
-datasets/dataset.csv;regressionTree;[2];30;0.0901;mean_absolute_error;1.2130395027961
-datasets/dataset.csv;SVM;[2, 3, 10, 11];30;0.0599;r2_score;0.199697475018703
-datasets/dataset.csv;regressionTree;[2];30;0.0873;root_mean_squared_error;1.43341007738698
-datasets/dataset.csv;linear;[2];30;0.0567;mean_absolute_error;1.18083994570454
-datasets/dataset.csv;linear;[2, 3, 10, 11];30;0.0831;root_mean_squared_error;1.35007982473199
-datasets/dataset.csv;linear;[2];30;0.0617;root_mean_squared_error;1.45560592147952
-datasets/dataset.csv;regressionTree;[2, 3, 10, 11];30;0.606;mean_absolute_error;1.25313512613943
-datasets/dataset.csv;SVM;[2];30;0.0519;mean_absolute_error;1.03575132071952
-datasets/dataset.csv;linear;[2, 3, 10, 11];30;0.0923;r2_score;0.0380594792316934
-datasets/dataset.csv;regressionTree;[2];30;0.0697;r2_score;0.0792872314450086
-datasets/dataset.csv;SVM;[2, 3, 10, 11];30;0.0778;root_mean_squared_error;1.41073681872205
-datasets/dataset.csv;regressionTree;[2, 3, 10, 11];30;0.085;r2_score;0.10051772196699
-datasets/dataset.csv;regressionTree;[2, 3, 10, 11];30;0.0859;root_mean_squared_error;1.55771034032693
-datasets/dataset.csv;linear;[2];30;0.078;r2_score;0.25824526255731
+datasets/ozone.csv;SVM;[2, 3, 10, 11];1;2.187;mean_absolute_error;13.5857125029592
+datasets/ozone.csv;linear;[2, 3, 10, 11];1;0.1666;mean_absolute_error;10.6224296898869
+datasets/ozone.csv;SVM;[2];1;0.0941;root_mean_squared_error;20.2163053574254
+datasets/ozone.csv;SVM;[2];1;0.0745;r2_score;0.515492997710413
+datasets/ozone.csv;regressionTree;[2];1;0.0891;mean_absolute_error;18.0631171823568
+datasets/ozone.csv;SVM;[2, 3, 10, 11];1;0.0697;r2_score;0.545359580007714
+datasets/ozone.csv;regressionTree;[2];1;0.0642;root_mean_squared_error;18.3479308433631
+datasets/ozone.csv;linear;[2];1;0.0576;mean_absolute_error;19.0750312261081
+datasets/ozone.csv;linear;[2, 3, 10, 11];1;0.0862;root_mean_squared_error;15.3690594755829
+datasets/ozone.csv;linear;[2];1;0.0716;root_mean_squared_error;20.8374940037348
+datasets/ozone.csv;regressionTree;[2, 3, 10, 11];1;0.0911;mean_absolute_error;15.2309110244594
+datasets/ozone.csv;SVM;[2];1;0.0828;mean_absolute_error;15.0357991122195
+datasets/ozone.csv;linear;[2, 3, 10, 11];1;0.0889;r2_score;0.801002745240044
+datasets/ozone.csv;regressionTree;[2];1;0.0686;r2_score;0.485035198275077
+datasets/ozone.csv;SVM;[2, 3, 10, 11];1;0.0547;root_mean_squared_error;15.146579219539
+datasets/ozone.csv;regressionTree;[2, 3, 10, 11];1;0.0704;r2_score;0.475530350581597
+datasets/ozone.csv;regressionTree;[2, 3, 10, 11];1;0.0618;root_mean_squared_error;18.8483654941697
+datasets/ozone.csv;linear;[2];1;0.0625;r2_score;0.479649460223531

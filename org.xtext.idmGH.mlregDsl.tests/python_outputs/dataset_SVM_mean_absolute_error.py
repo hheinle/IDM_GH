@@ -25,7 +25,7 @@ errorName = "mean_absolute_error"
 print(errorName)
 print(error)
 import csv
-row = ['datasets/dataset.csv', algo, [1], 29, 0.1415, errorName, error];
+row = ['datasets/dataset.csv', algo, [1], 29, 0.2957, errorName, error];
 f = open('statistics/benchmark_Pyth.csv', 'a', newline="")
 with f: 
 	writer = csv.writer(f)
