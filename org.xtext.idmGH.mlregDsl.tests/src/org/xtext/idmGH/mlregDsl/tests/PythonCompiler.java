@@ -30,7 +30,7 @@ public class PythonCompiler {
 			colVarsString += colvar.getIdCol();
 			colVarsString += ",";
 		}
-		colVarsString.replaceAll(",$", "");
+		colVarsString = colVarsString.replaceAll(",$", "");
 		int targetVar = mlRegression.getTargetVar().getTargetVar().getIdCol();
 		String algo = mlRegression.getAlgorithm().getAlgoName().getName();
 		String errorMeasure = mlRegression.getErrorMeasure().getErrorMeasure().getName();
@@ -75,8 +75,8 @@ public class PythonCompiler {
 		pythonCode += "print(\"Target variable : \", "+ targetVar +")\n";
 		pythonCode += "print(\"Predictive variable(s) : \", "+ colVarsString +")\n";
 		// Printing prediction vs reality
-		//pythonCode += "df_prediction = pd.DataFrame({'Actual': y_test, 'Predicted': y_prediction})\n";
-		//pythonCode += "print(\"df_prediction : \", df_prediction)\n";
+		pythonCode += "df_prediction = pd.DataFrame({'Actual': y_test, 'Predicted': y_prediction})\n";
+		pythonCode += "print(\"df_prediction : \", df_prediction)\n";
 
 		// Compute and display the error
 		// Set error measure to use

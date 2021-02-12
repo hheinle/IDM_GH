@@ -18,7 +18,7 @@ import static com.google.common.io.Files.*
 
 @ExtendWith(InjectionExtension)
 @InjectWith(MLRegInjectorProvider)
-class TestCompilers {
+class TestCompilers1 {
 	
 	@Inject
 	ParseHelper<Model> parseHelper

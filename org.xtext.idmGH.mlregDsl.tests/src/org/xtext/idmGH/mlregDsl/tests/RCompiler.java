@@ -37,6 +37,7 @@ public class RCompiler {
 		String algorithm = mlReg.getAlgorithm().getAlgoName().getName();
 		String errorType = mlReg.getErrorMeasure().getErrorMeasure().getName();
 		String targetVarR = Integer.toString(targetVar);
+
 		String rCode = "library(e1071)\n";
 		rCode += "library(tree)\n";
 		rCode += "library(Metrics)\n";
@@ -67,7 +68,7 @@ public class RCompiler {
 			rCode += ")\n";
 		}
 		rCode += "prediction=predict(model, test)\n";
-		rCode += "data.frame(test[1], valeurs_prédites=unlist(prediction))\n";
+		rCode += "data.frame(test[1], valeurs_predites=unlist(prediction))\n";
 		rCode += "actual=as.vector(t(test[1]))\n";
 
 		if(errorType.equalsIgnoreCase("root_mean_squared_error")) {
