@@ -42,14 +42,16 @@ Il existe une variation dans ces paramètres selon le compilateur (R ou Python) 
 
 ## Utilisation du projet
 Pour utiliser notre DSL, il faut :
-* cloner ce projet git et le visualiser depuis Eclipse DSL
+* cloner ce projet git et le visualiser depuis [Eclipse IDE for Java and DSL](https://www.eclipse.org/downloads/packages/)
 * compiler la [grammaire](org.xtext.idmGH.mlregDsl/src/org/xtext/idmGH/mlregDsl/MLReg.xtext)
-* 
+* avoir [Python](https://www.python.org/downloads/) et [R](https://cran.r-project.org/bin/windows/) sur la machine utilisée
+* Exécuter les [classes de test](https://github.com/hheinle/IDM_GH/tree/master/org.xtext.idmGH.mlregDsl.tests/src/org/xtext/idmGH/mlregDsl/tests)
+* Regarder les résultats dans le [dossier statistics](https://github.com/hheinle/IDM_GH/tree/master/org.xtext.idmGH.mlregDsl.tests/statistics) : ils montrent, pour chaque exécution de compilateur, le temps d'exécution, la précision de la prédiction, le modèle de prédiction et le jeu de données utilisés. Ces fichiers sont analysés dans nos rapports individuels joints au mail de rendu.
 
 ### Docker
-Nous avons créer des images Docker pour avoir des environnements disposant des dépendances Python et R. Vous trouverez le Dockerfile R [ici](https://github.com/hheinle/IDM_GH/tree/master/org.xtext.idmGH.mlregDsl.tests/r_docker) et le Dockerfile Python [ici](https://github.com/hheinle/IDM_GH/tree/master/org.xtext.idmGH.mlregDsl.tests/python_docker).
+Nous avons créer des images Docker pour avoir des environnements disposant des dépendances Python et R pour éviter d'avoir à installer les logiciels en local. Vous trouverez le Dockerfile R [ici](https://github.com/hheinle/IDM_GH/tree/master/org.xtext.idmGH.mlregDsl.tests/r_docker) et le Dockerfile Python [ici](https://github.com/hheinle/IDM_GH/tree/master/org.xtext.idmGH.mlregDsl.tests/python_docker).
 Afin de pouvoir construire les images, il faut :
-* avoir Docker sur votre machine
-* avoir le plugin Docker tooling dans Eclipse IDE
-Il est alors possible de construire les images depuis les Dockerfile et de lancer les conteneurs associés depuis Eclipse.
-Nos Dockerfile permettent de lancer les fichiers ".r" ou ".py" obtenus depuis nos compilateurs.
+* avoir [Docker](https://www.docker.com/products/docker-desktop) sur votre machine
+* avoir le plugin Docker tooling dans Eclipse IDE (Aller dans Help > Install new software puis chercher "Docker tooling")
+Il est alors possible de construire les images depuis les Dockerfile (en faisant Clic droit > Run as > Docker image build) et de lancer les conteneurs associés depuis Eclipse.
+Nos Dockerfile permettent de lancer les fichiers ".r" ou ".py" obtenus grâce à nos compilateurs.
