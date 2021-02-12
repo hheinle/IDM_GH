@@ -54,4 +54,6 @@ Afin de pouvoir construire les images, il faut :
 * avoir [Docker](https://www.docker.com/products/docker-desktop) sur votre machine
 * avoir le plugin Docker tooling dans Eclipse IDE (Aller dans Help > Install new software puis chercher "Docker tooling")
 Il est alors possible de construire les images depuis les Dockerfile (en faisant Clic droit > Run as > Docker image build) et de lancer les conteneurs associés depuis Eclipse.
-Nos Dockerfile permettent de lancer les fichiers ".r" ou ".py" obtenus grâce à nos compilateurs.
+Nos Dockerfile permettent de lancer les fichiers ".r" obtenus grâce à nos compilateurs.
+Nous avons également réalisé le Dockerfile pour lancer les fichiers ".py" mais nous n'y sommes pas parvenus (voir issue).
+
