@@ -1,17 +1,18 @@
-# Base image https://hub.docker.com/u/rocker/
-FROM rocker/r-base:latest
-
-## create directories
-##RUN mkdir -p /datasets
-##RUN mkdir -p /R_outputs
-##RUN mkdir -p /install_packages
-
-
-## copy files
-COPY .. .
-
-## install R-packages
-RUN Rscript /r_install_packages.r
-
-## run the script
-CMD ["R", "./*.r"]
+# Base image ubuntu:latest
+FROM ubuntu:latest
+## do not ask for user input in installation process
+ARG DEBIAN_FRONTEND=noninteractive
+## getting updates
+RUN apt-get -y update &&\
+	## install git
+	apt-get -y install git &&\
+	## install R-packages
+	apt-get -y install r-base &&\
+	## clone project repository
+	git clone https://github.com/hheinle/IDM_GH.git &&\
+	## install missing R packages
+	Rscript IDM_GH/org.xtext.idmGH.mlregDsl.tests/r_docker/r_install_packages.r
+	## run the script
+WORKDIR /IDM_GH/org.xtext.idmGH.mlregDsl.tests
+RUN Rscript R_outputs/main.r
+CMD Rscript ./R_outputs/main.r
