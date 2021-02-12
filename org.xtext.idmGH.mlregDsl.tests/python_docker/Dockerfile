@@ -3,11 +3,12 @@ FROM ubuntu:latest
 ## do not ask for user input in installation process
 ARG DEBIAN_FRONTEND=noninteractive
 ## getting updates
-RUN apt-get -y update &&\
+RUN apt-get update &&\
 	## install git
-	apt-get -y install git &&\
-	## install R-packages
-	apt-get -y install python &&\
+	apt-get install git &&\
+	## install python-packages
+	apt-get install python &&\
+	apt-get install python-pip &&\
 	## clone project repository
 	git clone https://github.com/hheinle/IDM_GH.git &&\
 	## install missing R packages
