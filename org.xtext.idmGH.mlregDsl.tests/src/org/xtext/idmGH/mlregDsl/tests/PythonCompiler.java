@@ -35,8 +35,6 @@ public class PythonCompiler {
 		String algo = mlRegression.getAlgorithm().getAlgoName().getName();
 		String errorMeasure = mlRegression.getErrorMeasure().getErrorMeasure().getName();
 
-		// Getting starting time
-
 		String pythonCode = "import pandas as pd\n" + "import matplotlib.pyplot as plt\n"
 				+ "from sklearn.model_selection import train_test_split\n" + "from sklearn import tree\n"
 				+ "from sklearn.linear_model import LinearRegression\n" + "from sklearn import svm\n"
@@ -73,7 +71,7 @@ public class PythonCompiler {
 		// Prediction
 		pythonCode += "y_prediction = mlreg.predict(X_test)\n";
 
-		// Printing predictive vars and targetVar
+		// Printing predictive variables and target variable
 		pythonCode += "print(\"Target variable : \", "+ targetVar +")\n";
 		pythonCode += "print(\"Predictive variable(s) : \", "+ colVarsString +")\n";
 		// Printing prediction vs reality
@@ -114,8 +112,8 @@ public class PythonCompiler {
 		
 		// serialize code into Python filename
 		csvFile = csvFile.substring(csvFile.lastIndexOf("/")).replace("/", "");
-		//String PYTHON_OUTPUT = "python_outputs/" + csvFile.replaceAll(".csv", "") + "_" + algo + "_" + errorMeasure + ".py";
-		String PYTHON_OUTPUT = "python_outputs/MLR.py";
+		String PYTHON_OUTPUT = "python_outputs/" + csvFile.replaceAll(".csv", "") + "_" + algo + "_" + errorMeasure + ".py";
+		//String PYTHON_OUTPUT = "python_outputs/MLR.py";
 		Files.write(pythonCode.getBytes(), new File(PYTHON_OUTPUT));
 		Process p = Runtime.getRuntime().exec("python " + PYTHON_OUTPUT);
 		BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));

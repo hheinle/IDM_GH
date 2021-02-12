@@ -5,11 +5,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
 import org.xtext.idmGH.mlregDsl.mLReg.ColVar;
-import org.xtext.idmGH.mlregDsl.mLReg.CsvFile;
 import org.xtext.idmGH.mlregDsl.mLReg.MlRegression;
 import org.xtext.idmGH.mlregDsl.mLReg.Model;
 
@@ -27,16 +25,15 @@ public class RCompiler {
 		long startTime = System.nanoTime();
 		MlRegression mlReg = _model.getMlRegression();
 		String fileName = mlReg.getCsvFile().getCsvFile();
-		System.out.println(fileName);
 		int testSize = mlReg.getTestSize().getTestSize();
 		double trainSize = (100 - testSize)/(double)100;
 		EList<ColVar> predictiveVars = mlReg.getPredictiveVars().getPredictiveVar();
 		ArrayList<Integer> listPredictiveVars = new ArrayList<Integer>();
 		for(ColVar col: predictiveVars) {
-			int colId = col.getIdCol();
+			int colId = col.getIdCol()+1;
 			listPredictiveVars.add(colId);
 		}
-		int targetVar = mlReg.getTargetVar().getTargetVar().getIdCol();
+		int targetVar = mlReg.getTargetVar().getTargetVar().getIdCol()+1;
 		String algorithm = mlReg.getAlgorithm().getAlgoName().getName();
 		String errorType = mlReg.getErrorMeasure().getErrorMeasure().getName();
 		String targetVarR = Integer.toString(targetVar);
@@ -95,13 +92,12 @@ public class RCompiler {
 		rCode += "line=paste(line,error,sep=\'\')\n";
 		rCode += "write(line,file=\"statistics/benchmark_R.csv\",append=TRUE)\n";
 
-		
-        String R_OUTPUT = "R_outputs/foo1.r";
-        
+        fileName = fileName.substring(fileName.lastIndexOf("/")).replace("/", "");
+        String R_OUTPUT = "r_outputs/" + fileName.replaceAll(".csv", "") + "_" + algorithm + "_" + errorType+ ".r";
+        //String R_OUTPUT = "R_outputs/MLR.r";
         Files.write(rCode.getBytes(), new File(R_OUTPUT));
 
         // execute the generated Python code
-        // roughly: exec "r -f foo.r"
         Process p = Runtime.getRuntime().exec("Rscript " + R_OUTPUT);
 
         // output

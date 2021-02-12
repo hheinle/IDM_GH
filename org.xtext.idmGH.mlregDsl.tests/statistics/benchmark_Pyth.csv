@@ -1,19 +1,19 @@
 Algorithme,Variable(s) predictrice(s), Variable cible, Duree (ms), Type Erreur, Erreur
-SVM,"[1, 2, 9, 10]",0,0.3198,mean_absolute_error,23.61207451380798
-linear,"[1, 2, 9, 10]",0,0.1066,mean_absolute_error,13.761799761514332
-SVM,[1],0,0.3126,root_mean_squared_error,35.20936873439152
-SVM,[1],0,0.1087,r2_score,0.22001886091553513
-regressionTree,[1],0,0.1311,mean_absolute_error,19.306451612903224
-SVM,"[1, 2, 9, 10]",0,0.0828,r2_score,0.23108656071741762
-regressionTree,[1],0,0.09,root_mean_squared_error,25.42742782944247
-linear,[1],0,0.4983,mean_absolute_error,16.397926309558507
-linear,"[1, 2, 9, 10]",0,0.1137,root_mean_squared_error,17.139662088684695
-linear,[1],0,0.0712,root_mean_squared_error,20.141171982340147
-regressionTree,"[1, 2, 9, 10]",0,0.1022,mean_absolute_error,15.870967741935484
-SVM,[1],0,0.1104,mean_absolute_error,19.672727487193857
-linear,"[1, 2, 9, 10]",0,0.0872,r2_score,0.7015315254779266
-regressionTree,[1],0,0.1064,r2_score,0.524806825198117
-SVM,"[1, 2, 9, 10]",0,0.1309,root_mean_squared_error,22.63645988661825
-regressionTree,"[1, 2, 9, 10]",0,0.0946,r2_score,0.4785733259342446
-regressionTree,"[1, 2, 9, 10]",0,0.161,root_mean_squared_error,20.537927149858703
-linear,[1],0,0.0952,r2_score,0.72989737461779
+SVM,"[1, 2, 9, 10]",0,0.3579,mean_absolute_error,19.214249818298008
+linear,"[1, 2, 9, 10]",0,0.1284,mean_absolute_error,13.381885654136768
+SVM,[1],0,0.1303,root_mean_squared_error,28.257146709078754
+SVM,[1],0,0.1081,r2_score,0.24982231124607968
+regressionTree,[1],0,0.1395,mean_absolute_error,16.405913978494624
+SVM,"[1, 2, 9, 10]",0,0.1399,r2_score,0.20320517679409356
+regressionTree,[1],0,0.122,root_mean_squared_error,18.50322068255254
+linear,[1],0,0.1003,mean_absolute_error,19.498146154983644
+linear,"[1, 2, 9, 10]",0,0.1096,root_mean_squared_error,15.272448867653468
+linear,[1],0,0.1284,root_mean_squared_error,22.38342965942929
+regressionTree,"[1, 2, 9, 10]",0,0.1348,mean_absolute_error,13.419354838709678
+SVM,[1],0,0.1126,mean_absolute_error,21.54025700714616
+linear,"[1, 2, 9, 10]",0,0.1044,r2_score,0.6803099479608152
+regressionTree,[1],0,0.1429,r2_score,0.3308997368682355
+SVM,"[1, 2, 9, 10]",0,0.1162,root_mean_squared_error,37.34304999583147
+regressionTree,"[1, 2, 9, 10]",0,0.1079,r2_score,0.4526618753471462
+regressionTree,"[1, 2, 9, 10]",0,0.1175,root_mean_squared_error,19.99677393336074
+linear,[1],0,0.0878,r2_score,0.5398013148926388
