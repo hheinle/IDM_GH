@@ -1,19 +1,19 @@
-Algorithme,Variable(s) predictrice(s), Variable cible, Duree (ms), Type Erreur, Erreur
-SVM,"[1, 2, 9, 10]",0,0.3903,mean_absolute_error,22.146663676278013
-linear,"[1, 2, 9, 10]",0,0.2075,mean_absolute_error,10.942535640944689
-SVM,[1],0,0.1637,root_mean_squared_error,21.27612981047019
-SVM,[1],0,0.7125,r2_score,0.29386028821213117
-regressionTree,[1],0,0.1554,mean_absolute_error,16.822580645161292
-SVM,"[1, 2, 9, 10]",0,0.1964,r2_score,0.15002175989641564
-regressionTree,[1],0,0.0991,root_mean_squared_error,26.081997114421714
-linear,[1],0,0.1352,mean_absolute_error,17.327017912186907
-linear,"[1, 2, 9, 10]",0,0.0957,root_mean_squared_error,16.88775009195247
-linear,[1],0,0.1308,root_mean_squared_error,17.51867762014336
-regressionTree,"[1, 2, 9, 10]",0,0.2261,mean_absolute_error,14.03225806451613
-SVM,[1],0,0.1078,mean_absolute_error,28.748991131736297
-linear,"[1, 2, 9, 10]",0,0.1001,r2_score,0.6569309749826284
-regressionTree,[1],0,0.2687,r2_score,0.25940145274081416
-SVM,"[1, 2, 9, 10]",0,0.1106,root_mean_squared_error,26.798818788638496
-regressionTree,"[1, 2, 9, 10]",0,0.1076,r2_score,0.6562792273805491
-regressionTree,"[1, 2, 9, 10]",0,0.1489,root_mean_squared_error,15.345483731956511
-linear,[1],0,0.1246,r2_score,0.6797244826512543
+Jeu de donnees, Algorithme,Variable(s) predictrice(s), Variable cible, Duree (ms), Type Erreur, Erreur
+datasets/dataset.csv,SVM,"[1, 2, 9, 10]",29,0.4856,mean_absolute_error,1.0912870468518008
+datasets/dataset.csv,linear,"[1, 2, 9, 10]",29,0.1555,mean_absolute_error,1.0686677862983622
+datasets/dataset.csv,SVM,[1],29,0.3169,root_mean_squared_error,1.466166277869065
+datasets/dataset.csv,SVM,[1],29,0.1808,r2_score,0.16705438598439826
+datasets/dataset.csv,regressionTree,[1],29,0.3596,mean_absolute_error,1.1078015502043177
+datasets/dataset.csv,SVM,"[1, 2, 9, 10]",29,0.0998,r2_score,0.19322987003510594
+datasets/dataset.csv,regressionTree,[1],29,0.1669,root_mean_squared_error,1.49318298755215
+datasets/dataset.csv,linear,[1],29,0.1015,mean_absolute_error,1.079583338767722
+datasets/dataset.csv,linear,"[1, 2, 9, 10]",29,0.1136,root_mean_squared_error,1.4262030209211323
+datasets/dataset.csv,linear,[1],29,0.1475,root_mean_squared_error,1.4072776258463378
+datasets/dataset.csv,regressionTree,"[1, 2, 9, 10]",29,0.1916,mean_absolute_error,1.2477108886483887
+datasets/dataset.csv,SVM,[1],29,0.1415,mean_absolute_error,1.0539799205106855
+datasets/dataset.csv,linear,"[1, 2, 9, 10]",29,0.1472,r2_score,0.24648313839464298
+datasets/dataset.csv,regressionTree,[1],29,0.1736,r2_score,0.1779874188737668
+datasets/dataset.csv,SVM,"[1, 2, 9, 10]",29,0.1938,root_mean_squared_error,1.3345700304232258
+datasets/dataset.csv,regressionTree,"[1, 2, 9, 10]",29,0.1628,r2_score,-0.48874808104056466
+datasets/dataset.csv,regressionTree,"[1, 2, 9, 10]",29,0.1638,root_mean_squared_error,1.9007241335589498
+datasets/dataset.csv,linear,[1],29,0.1708,r2_score,0.21921892738084425

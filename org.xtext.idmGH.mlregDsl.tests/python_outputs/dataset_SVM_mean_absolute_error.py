@@ -8,7 +8,7 @@ from sklearn.metrics import r2_score
 from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import mean_squared_error
 df = pd.read_csv("datasets/dataset.csv")
-X = df.iloc[: ,[1,2,9,10]]
+X = df.iloc[: ,[1]]
 y = df.iloc[: ,29]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
 mlreg = svm.SVR()
@@ -17,7 +17,7 @@ print(algo)
 mlreg.fit(X_train, y_train)
 y_prediction = mlreg.predict(X_test)
 print("Target variable : ", 29)
-print("Predictive variable(s) : ", 1,2,9,10)
+print("Predictive variable(s) : ", 1)
 df_prediction = pd.DataFrame({'Actual': y_test, 'Predicted': y_prediction})
 print("df_prediction : ", df_prediction)
 error = mean_absolute_error(y_test, y_prediction)
@@ -25,7 +25,7 @@ errorName = "mean_absolute_error"
 print(errorName)
 print(error)
 import csv
-row = [algo, [1,2,9,10], 29, 0.4169, errorName, error];
+row = ['datasets/dataset.csv', algo, [1], 29, 0.1415, errorName, error];
 f = open('statistics/benchmark_Pyth.csv', 'a', newline="")
 with f: 
 	writer = csv.writer(f)

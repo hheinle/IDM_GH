@@ -25,7 +25,7 @@ errorName = "mean_absolute_error"
 print(errorName)
 print(error)
 import csv
-row = [algo, [1], 0, 0.1078, errorName, error];
+row = ['datasets/ozone.csv', algo, [1], 0, 0.1816, errorName, error];
 f = open('statistics/benchmark_Pyth.csv', 'a', newline="")
 with f: 
 	writer = csv.writer(f)

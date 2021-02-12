@@ -26,9 +26,9 @@ class TestCompilers1 {
 	@BeforeAll
 	def static void init() {
 		Files.newBufferedWriter(Paths.get("statistics/benchmark_R.csv"))
-		asCharSink(new File('statistics/benchmark_R.csv'), Charsets.UTF_8).write('Algorithme;Variable(s) predictrice(s); Variable cible; Duree (ms); Type Erreur; Erreur\n')
+		asCharSink(new File('statistics/benchmark_R.csv'), Charsets.UTF_8).write('Jeu de donnees;Algorithme;Variable(s) predictrice(s); Variable cible; Duree (ms); Type Erreur; Erreur\n')
 		Files.newBufferedWriter(Paths.get("statistics/benchmark_Pyth.csv"))
-		asCharSink(new File('statistics/benchmark_Pyth.csv'), Charsets.UTF_8).write('Algorithme,Variable(s) predictrice(s), Variable cible, Duree (ms), Type Erreur, Erreur\n')
+		asCharSink(new File('statistics/benchmark_Pyth.csv'), Charsets.UTF_8).write('Jeu de donnees, Algorithme,Variable(s) predictrice(s), Variable cible, Duree (ms), Type Erreur, Erreur\n')
 	}
 	
 	@Test

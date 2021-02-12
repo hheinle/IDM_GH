@@ -25,7 +25,7 @@ errorName = "root_mean_squared_error"
 print(errorName)
 print(error)
 import csv
-row = [algo, [1], 29, 0.7352, errorName, error];
+row = ['datasets/dataset.csv', algo, [1], 29, 0.1475, errorName, error];
 f = open('statistics/benchmark_Pyth.csv', 'a', newline="")
 with f: 
 	writer = csv.writer(f)

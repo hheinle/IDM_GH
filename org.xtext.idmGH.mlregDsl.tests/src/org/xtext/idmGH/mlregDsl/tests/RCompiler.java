@@ -89,7 +89,7 @@ public class RCompiler {
 		long endTime = System.nanoTime();
 		double durationMs = (endTime - startTime) / (double) 1000000;
 		
-		rCode += "line=paste('"+ algorithm +";"+listPredictiveVars.toString()+";"+targetVar+";"+durationMs+";"+errorType+"',';',sep=\'\')\n";
+		rCode += "line=paste('"+ fileName +";"+ algorithm +";"+listPredictiveVars.toString()+";"+targetVar+";"+durationMs+";"+errorType+"',';',sep=\'\')\n";
 		rCode += "line=paste(line,error,sep=\'\')\n";
 		rCode += "write(line,file=\"statistics/benchmark_R.csv\",append=TRUE)\n";
 
