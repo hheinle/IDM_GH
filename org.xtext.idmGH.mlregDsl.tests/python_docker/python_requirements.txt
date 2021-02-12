@@ -1,4 +1,4 @@
 pandas
 scikit-learn
-plot-lib
 tree
+plot-lib
